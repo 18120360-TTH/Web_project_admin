@@ -1,5 +1,6 @@
 # Web_project_admin
-
+# Database diagram: https://dbdiagram.io/d/6189317002cf5d186b4b7328
+# Report: https://drive.google.com/drive/folders/13TzGRE1efDltise9IhBfzglfTUo8RFVv
 ## Phase 02 tasks - CRUD:
 - [x] Xóa chi tiết thừa trong code
 - [ ] Xóa các file không dùng
