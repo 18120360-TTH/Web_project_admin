@@ -5,10 +5,12 @@ const morgan = require('morgan')
 const app = express()
 const port = 3000
 
+const route = require('./routes')
+
 // Static file
 app.use(express.static(path.join(__dirname, 'public')))
 
-// HTTP logger
+// HTTP loggers
 app.use(morgan('combined'))
 
 // Template engine
@@ -19,20 +21,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'))
 
 // Routing
-app.get('/', (req, res) => {res.render('index')})
-app.get('/products-list', (req, res) => {res.render('products-list')})
-app.get('/product-detail', (req, res) => {res.render('product-detail')})
-app.get('/add-product', (req, res) => {res.render('add-product')})
-app.get('/product-edit', (req, res) => {res.render('product-edit')})
-
-app.get('/orders-list', (req, res) => {res.render('orders-list')})
-app.get('/customers-list', (req, res) => {res.render('customers-list')})
-
-app.get('/login', (req, res) => {res.render('login', {layout: 'auth-layout'})})
-app.get('/register', (req, res) => {res.render('register', {layout: 'auth-layout'})})
-app.get('/pass-recovery', (req, res) => {res.render('pass-recovery', {layout: 'auth-layout'})})
-
-app.get('*', (req, res) => {res.render('404')})
+route(app)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
