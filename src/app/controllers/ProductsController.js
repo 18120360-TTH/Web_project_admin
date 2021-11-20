@@ -2,17 +2,17 @@ class ProductsController{
     
     // [GET] /products-list
     productList(req,res){
-        res.render('products/products-list')
+        res.render('products/product-list')
     }
 
     // [GET] /products-detail
     productDetail(req,res){
-        res.render('products/products-detail')
+        res.render('products/product-detail')
     }
 
     // [GET] /products-edit
     productEdit(req,res){
-        res.render('products/products-edit')
+        res.render('products/product-edit')
     }
 
     // [GET] /add-product

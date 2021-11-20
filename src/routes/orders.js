@@ -3,6 +3,6 @@ const router = express.Router()
 
 const OrdersController = require('../app/controllers/OrdersController')
 
-router.use('/', OrdersController.orderList)
+router.use('/orders-list', OrdersController.orderList)
 
 module.exports = router
