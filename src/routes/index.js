@@ -7,7 +7,7 @@ const ordersRouter = require('./orders')
 
 function route(app) { 
     app.use('/products', productsRouter)
-    app.use('/login', authRouter)
+    app.use('/auth', authRouter)
     app.use('/customer', customerRouter)
     app.use('/orders', ordersRouter)
     app.use('/', sitesRouter)
