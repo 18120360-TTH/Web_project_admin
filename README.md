@@ -1,6 +1,9 @@
 # Web_project_admin
-
-## Phase 02 tasks - CRUD:
+### Database diagram: 
+  https://dbdiagram.io/d/6189317002cf5d186b4b7328
+### Report & database scripts:
+  https://drive.google.com/drive/folders/13TzGRE1efDltise9IhBfzglfTUo8RFVv
+### Phase 02 tasks - CRUD:
 - [x] Xóa chi tiết thừa trong code
 - [ ] Xóa các file không dùng
 - [ ] Tạo trang user-detail, order-detail
