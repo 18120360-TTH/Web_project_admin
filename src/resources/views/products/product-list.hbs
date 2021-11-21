@@ -284,14 +284,9 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div>
-                                                    <h5>Clothes & Accessories</h5>
-                                                    <ol class="breadcrumb p-0 bg-transparent mb-2">
-                                                        <li class="breadcrumb-item"><a
-                                                                href="javascript: void(0);">Fashion</a></li>
-                                                        <li class="breadcrumb-item"><a
-                                                                href="javascript: void(0);">Clothing</a></li>
-                                                        <li class="breadcrumb-item active">T-shirts</li>
-                                                    </ol>
+                                                    <h5>Books</h5>
+                                                    <p>Show {{firstIndex}} - {{lastIndex}} of {{numOfResults}} results
+                                                    </p>
                                                 </div>
                                             </div>
 
@@ -323,6 +318,7 @@
                                         </ul>
 
                                         <div class="row no-gutters">
+                                            {{#each books}}
                                             <div class="col-xl-4 col-sm-6">
                                                 <div class="product-box">
                                                     <div class="product-img">
@@ -334,178 +330,76 @@
                                                                 <i class="mdi mdi-heart-outline"></i>
                                                             </a>
                                                         </div>
-                                                        <img src="/images/product/img-1.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
+                                                        <img src="{{img_url}}" alt="" class="img-fluid mx-auto d-block">
                                                     </div>
 
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Blue color, T-shirt</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Full
-                                                                sleeve T-shirt</a></h5>
+                                                    <div class="text-center mt-2">
+                                                        <h5 class="font-size-17">
+                                                            <a href="/products/product-edit?ID={{book_id}}"
+                                                                class="text-dark">{{title}}</a>
+                                                        </h5>
 
-                                                        <h5 class="mt-3 mb-0">$240</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="product-box">
-                                                    <div class="product-img">
-                                                        <div class="product-ribbon badge badge-primary">
-                                                            - 25 %
-                                                        </div>
-                                                        <div class="product-like">
-                                                            <a href="#">
-                                                                <i class="mdi mdi-heart-outline"></i>
-                                                            </a>
-                                                        </div>
-                                                        <img src="/images/product/img-2.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Half sleeve, T-shirt</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Half
-                                                                sleeve T-shirt </a></h5>
-
-                                                        <h5 class="mt-3 mb-0"><span
-                                                                class="text-muted mr-2"><del>$240</del></span>$225</h5>
+                                                        <h5 class="font-size-15 mt-3 mb-0 text-primary">{{price}}đ</h5>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="product-box">
-                                                    <div class="product-img">
-                                                        <div class="product-like">
-                                                            <a href="#">
-                                                                <i class="mdi mdi-heart text-danger"></i>
-                                                            </a>
-                                                        </div>
-                                                        <img src="/images/product/img-3.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Green color, Hoodie</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Hoodie
-                                                                (Green)</a></h5>
-
-                                                        <h5 class="mt-3 mb-0"><span
-                                                                class="text-muted mr-2"><del>$290</del></span>$275</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="product-box">
-                                                    <div class="product-img">
-                                                        <div class="product-like">
-                                                            <a href="#">
-                                                                <i class="mdi mdi-heart-outline"></i>
-                                                            </a>
-                                                        </div>
-                                                        <img src="/images/product/img-4.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Gray color, Hoodie</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Hoodie
-                                                                (Green)</a></h5>
-
-                                                        <h5 class="mt-3 mb-0"><span
-                                                                class="text-muted mr-2"><del>$290</del></span>$275</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="product-box">
-                                                    <div class="product-img">
-                                                        <div class="product-like">
-                                                            <a href="#">
-                                                                <i class="mdi mdi-heart text-danger"></i>
-                                                            </a>
-                                                        </div>
-                                                        <img src="/images/product/img-5.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Blue color, T-shirt</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Full
-                                                                sleeve T-shirt</a></h5>
-
-                                                        <h5 class="mt-3 mb-0">$242</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="product-box">
-                                                    <div class="product-img">
-                                                        <div class="product-ribbon badge badge-primary">
-                                                            - 22 %
-                                                        </div>
-                                                        <div class="product-like">
-                                                            <a href="#">
-                                                                <i class="mdi mdi-heart-outline"></i>
-                                                            </a>
-                                                        </div>
-                                                        <img src="/images/product/img-6.png" alt=""
-                                                            class="img-fluid mx-auto d-block">
-
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <p class="font-size-12 mb-1">Black color, T-shirt</p>
-                                                        <h5 class="font-size-15"><a href="/products/product-detail"
-                                                                class="text-dark">Half
-                                                                sleeve T-shirt </a></h5>
-
-                                                        <h5 class="mt-3 mb-0"><span
-                                                                class="text-muted mr-2"><del>$240</del></span>$225</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {{/each}}
                                         </div>
 
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
                                                 <div>
-                                                    <p class="mb-sm-0 mt-2">Page <span class="font-weight-bold">2</span>
-                                                        Of <span class="font-weight-bold">113</span></p>
+                                                    <p class="mb-sm-0 mt-2">Page <span
+                                                            class="font-weight-bold">{{page}}</span>
+                                                        Of <span class="font-weight-bold">{{lastPage}}</span></p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="float-sm-right">
                                                     <ul class="pagination pagination-rounded mb-sm-0">
-                                                        <li class="page-item disabled">
-                                                            <a href="#" class="page-link"><i
+                                                        {{#if isPreValid}}
+                                                        <li class="page-item">
+                                                            <a href="{{path}}1" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-left"></i></a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a href="{{path}}{{prePage}}" class="page-link"><i
                                                                     class="mdi mdi-chevron-left"></i></a>
                                                         </li>
-                                                        <li class="page-item">
-                                                            <a href="#" class="page-link">1</a>
+                                                        {{else}}
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}1" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-left"></i></a>
                                                         </li>
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-left"></i></a>
+                                                        </li>
+                                                        {{/if}}
+
                                                         <li class="page-item active">
-                                                            <a href="#" class="page-link">2</a>
+                                                            <a href="#" class="page-link">{{page}}</a>
                                                         </li>
+
+                                                        {{#if isNextValid}}
                                                         <li class="page-item">
-                                                            <a href="#" class="page-link">3</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a href="#" class="page-link">4</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a href="#" class="page-link">5</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a href="#" class="page-link"><i
+                                                            <a href="{{path}}{{nextPage}}" class="page-link"><i
                                                                     class="mdi mdi-chevron-right"></i></a>
                                                         </li>
+                                                        <li class="page-item">
+                                                            <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                                        </li>
+                                                        {{else}}
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-right"></i></a>
+                                                        </li>
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                                        </li>
+                                                        {{/if}}
                                                     </ul>
                                                 </div>
                                             </div>

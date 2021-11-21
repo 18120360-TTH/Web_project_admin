@@ -43,7 +43,7 @@
                                             <li class="nav-item">
                                                 <a href="#product-img" class="nav-link" data-toggle="tab">
                                                     <span class="step-number">02</span>
-                                                    <span class="step-title">Product Img</span>
+                                                    <span class="step-title">Product Images</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -54,26 +54,25 @@
 
                                                 <form>
                                                     <div class="row">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-5">
                                                             <div class="form-group">
-                                                                <label for="productname">Book name</label>
-                                                                <input id="productname" name="productname" type="text"
-                                                                    class="form-control"
-                                                                    value="How to win friends and influence people">
+                                                                <label for="Title">Book title</label>
+                                                                <input id="Title" name="Title" type="text"
+                                                                    class="form-control" value="{{bookByID.title}}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-3">
+                                                        <div class="col-lg-4">
                                                             <div class="form-group">
-                                                                <label for="productname">Author</label>
-                                                                <input id="productname" name="productname" type="text"
-                                                                    class="form-control" value="Dale Carnegie">
+                                                                <label for="Author">Author</label>
+                                                                <input id="Author" name="Author" type="text"
+                                                                    class="form-control" value="{{bookByID.authors}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="publisher">Publisher</label>
                                                                 <input id="publisher" name="publisher" type="text"
-                                                                    class="form-control" value="Simon and Schuster">
+                                                                    class="form-control" value="{{bookByID.publisher}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -83,36 +82,40 @@
                                                             <div class="form-group">
                                                                 <label for="isbn">ISBN</label>
                                                                 <input id="isbn" name="isbn" type="text"
-                                                                    class="form-control" value="1-4391-6734-6">
+                                                                    class="form-control" value="{{bookByID.ISBN}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="realese-year">Release year</label>
                                                                 <input id="realese-year" name="realese-year"
-                                                                    type="number" class="form-control" value="1936"
-                                                                    min="0" max="2099">
+                                                                    type="number" class="form-control"
+                                                                    value="{{bookByID.release_year}}" min="0"
+                                                                    max="2099">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="price">Original price</label>
                                                                 <input id="price" name="price" type="number" min="0"
-                                                                    value="10" class="form-control">
+                                                                    value="{{bookByID.origin_price}}"
+                                                                    class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="sale-price">Promotion price</label>
                                                                 <input id="sale-price" name="sale-price" type="number"
-                                                                    min="0" value="8" class="form-control">
+                                                                    min="0" value="{{bookByID.price}}"
+                                                                    class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label class="control-label">Category 01</label>
+                                                                <label class="control-label">Category 01 (Update
+                                                                    later)</label>
                                                                 <select class="form-control select2">
                                                                     <option>Self-help</option>
                                                                     <option value="SH">Self-help</option>
@@ -124,9 +127,10 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label class="control-label">Category 02</label>
+                                                                <label class="control-label">Category 02 (Update
+                                                                    later)</label>
                                                                 <select class="form-control select2">
                                                                     <option>Select</option>
                                                                     <option value="SH">Self-help</option>
@@ -138,121 +142,63 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-3">
 
                                                             <div class="form-group">
                                                                 <label for="page-num">Number of pages</label>
                                                                 <input id="page-num" name="page-num" type="number"
-                                                                    class="form-control" value="219">
+                                                                    class="form-control"
+                                                                    value="{{bookByID.number_of_pages}}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-3">
 
                                                             <div class="form-group">
                                                                 <label for="language">Language</label>
                                                                 <input id="language" name="language" type="text"
-                                                                    class="form-control" value="English">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label for="price">Edition</label>
-                                                                <input id="price" name="price" type="text"
-                                                                    class="form-control" value="Special">
+                                                                    class="form-control" value="{{bookByID.language}}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="productdesc">Product Description</label>
-                                                        <textarea class="form-control" id="productdesc" rows="5">You can go after the job you want—and get it! You can take the job you have—and improve it! You can take any situation—and make it work for you!
+                                                        <label for="productDesc">Product Description</label>
+                                                        <textarea class="form-control" id="productDesc" rows="5">{{bookByID.description}}
                                                         </textarea>
                                                     </div>
-                                                </form>
-                                            </div>
-                                            <div class="tab-pane" id="product-img">
-                                                <h4 class="card-title">Product Images</h4>
-                                                <div class="product-color d-flex justify-content-center">
-                                                    <span class="d-flex flex-column align-items-center mr-2">
-                                                        <a>
-                                                            <div class="product-color-item ">
-                                                                <img src="/images/product/img-1.png" alt=""
-                                                                    class="avatar-lg">
-                                                            </div>
-                                                        </a>
-                                                        <!-- <div>
-                                                            <button type="button" class="btn btn-primary">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </button>
-                                                        </div> -->
-                                                    </span>
-                                                    <span class="d-flex flex-column align-items-center mr-2">
-                                                        <a href="/images/product/img-5.png">
-                                                            <div class="product-color-item">
-                                                                <img src="/images/product/img-5.png" alt=""
-                                                                    class="avatar-lg">
-                                                            </div>
-                                                        </a>
-                                                    </span>
-                                                    <span class="d-flex flex-column align-items-center mr-2">
-                                                        <a href="/images/product/img-3.png">
-                                                            <div class="product-color-item">
-                                                                <img src="/images/product/img-3.png" alt=""
-                                                                    class="avatar-lg">
-                                                            </div>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                                <form action="/" method="post" class="dropzone">
-                                                    <div class="fallback">
-                                                        <input name="file" type="file" multiple />
-                                                    </div>
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="submit"
+                                                            class="btn btn-primary mr-2 waves-effect waves-light">Save
+                                                            Changes</button>
 
-                                                    <div class="dz-message needsclick">
-                                                        <div class="mb-3">
-                                                            <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
-                                                        </div>
-
-                                                        <h4>Drop files here or click to upload.</h4>
+                                                        <a class="btn btn-secondary waves-effect"
+                                                            href="/products/product-list">Cancel</a>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="tab-pane" id="product-img">
-                                                <h4 class="card-title">Product Images</h4>
-                                                <div class="form-group">
-                                                    <div class="product-color d-flex">
-                                                        <span class="d-flex flex-column align-items-center mr-2">
-                                                            <a>
-                                                                <div class="product-color-item ">
-                                                                    <img src="/images/product/img-1.png" alt=""
-                                                                        class="avatar-lg">
-                                                                </div>
-                                                            </a>
-                                                            <!-- <div>
-                                                                <button type="button" class="btn btn-primary">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div> -->
+                                                <form>
+                                                    <h4 class="card-title">Product Images</h4>
+                                                    <p>Each product has a fixed number of photos of 4, when uploading a
+                                                        new
+                                                        photo, it will replace the old one</p>
+                                                    <div class="product-color d-flex flex-wrap justify-content-between">
+                                                        {{#each bookImgs}}
+                                                        <span
+                                                            class="d-flex align-items-center justify-content-center mr-2">
+                                                            <span>
+                                                                <a>
+                                                                    <div class="product-color-item ">
+                                                                        <img src="{{img_url}}" width="200px" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </span>
+                                                            <span>
+                                                                <input id="formFileSm" type="file" />
+                                                            </span>
                                                         </span>
-                                                        <span class="d-flex flex-column align-items-center mr-2">
-                                                            <a href="/images/product/img-5.png">
-                                                                <div class="product-color-item">
-                                                                    <img src="/images/product/img-5.png" alt=""
-                                                                        class="avatar-lg">
-                                                                </div>
-                                                            </a>
-                                                        </span>
-                                                        <span class="d-flex flex-column align-items-center mr-2">
-                                                            <a href="/images/product/img-3.png">
-                                                                <div class="product-color-item">
-                                                                    <img src="/images/product/img-3.png" alt=""
-                                                                        class="avatar-lg">
-                                                                </div>
-                                                            </a>
-                                                        </span>
+                                                        {{/each}}
                                                     </div>
-                                                    <form acdivtion="/" method="post" class="dropzone">
+                                                    {{!-- <form action="/" method="post" class="dropzone">
                                                         <div class="fallback">
                                                             <input name="file" type="file" multiple />
                                                         </div>
@@ -265,21 +211,17 @@
 
                                                             <h4>Drop files here or click to upload.</h4>
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                    </form> --}}
+                                                    <div class="d-flex justify-content-center mt-4">
+                                                        <button type="submit"
+                                                            class="btn btn-primary mr-2 waves-effect waves-light">Update
+                                                            images</button>
+
+                                                        <a class="btn btn-secondary waves-effect"
+                                                            href="/products/product-list">Cancel</a>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <ul
-                                                class="pager wizard twitter-bs-wizard-pager-link d-flex justify-content-between">
-                                                <li class="previous"><a href="#">Previous</a></li>
-                                                <li>
-                                                    <button type="submit"
-                                                        class="btn btn-primary mr-2 waves-effect waves-light">Save
-                                                        Changes</button>
-                                                    
-                                                        <a class="btn waves-effect" href="/products/product-detail">Cancel</a>
-                                                </li>
-                                                <li class="next"><a href="#">Next</a></li>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>
