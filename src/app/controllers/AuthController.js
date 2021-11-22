@@ -1,6 +1,6 @@
 class AuthController {
     // [GET]  /login
-    login(req, res) {res.render('auth/login')}
+    login(req, res) { res.render('auth/login', { layout: 'auth-layout.hbs' }) }
 
     // [GET]  /signup
     //signup(req, res) {res.render('auth/register')}
