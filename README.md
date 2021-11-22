@@ -3,6 +3,12 @@
   https://dbdiagram.io/d/6189317002cf5d186b4b7328
 ### Report & database scripts:
   https://drive.google.com/drive/folders/13TzGRE1efDltise9IhBfzglfTUo8RFVv
+### Sequelize 
+https://sequelize.org/master/
+### Handlebar
+https://handlebarsjs.com/guide/expressions.html
+### Record
+https://drive.google.com/drive/folders/1WQ6PmBqaJ2KD3QSMwpmQGVQnq3niXKes?usp=sharing
 ### Phase 02 tasks - CRUD:
 - [x] Xóa chi tiết thừa trong code
 - [ ] Xóa các file không dùng
