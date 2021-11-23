@@ -6,8 +6,8 @@
 ### Phase 02 tasks - CRUD:
 - [x] Xóa chi tiết thừa trong code
 - [ ] Xóa các file không dùng
-- [ ] Tạo trang user-detail, order-detail
-- [ ] Tạo trang admin-profile, admin-profile-edit
+- [x] Tạo trang user-detail, order-detail
+- [x] Tạo trang admin-profile, admin-profile-edit
 - [x] Chuyển cấu trúc thư mục về MVC
 - [x] Tách "index.js" về hai thành phần controller và router
 - [x] Cài đặt các library xử lý database: sequelize, mysql2, sequelize-auto (không "--save-dev")

@@ -6,7 +6,7 @@
     list-style: none;
     font-family: 'Josefin Sans', sans-serif;
   }
-body{
+.detail{
     background-color: #f3f3f3;
     position: absolute;
     top: 50%;
