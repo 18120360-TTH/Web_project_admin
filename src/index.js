@@ -23,7 +23,7 @@ sequelize.authenticate()
     app.use(morgan('combined'))
 
     //Method Override
-    app.use(methodOverride('_method'))
+    //app.use(methodOverride('_method'))
 
     // Template engine
     app.engine('hbs', handlebars({
