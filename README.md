@@ -20,8 +20,8 @@ https://drive.google.com/drive/folders/1WQ6PmBqaJ2KD3QSMwpmQGVQnq3niXKes?usp=sha
 - [x] Connect database (tạo ".env", include file này vào ".gitignore")
 - [x] Tạo models từ database
 - [x] Hiển thị phân trang Products-list (tận dụng API của user-site)
-- [ ] Search trên trang Products-list
-- [x] Edit sản phẩm
+- [x] Search trên trang Products-list
+- [ ] Edit sản phẩm
 - [ ] Add sản phẩm mới (Dùng lại trang edit sản phẩm với data rỗng)
-- [ ] Xóa sản phẩm (soft-delete, chỉ disabled hiển thị, không xóa data trong DB)
+- [x] Xóa sản phẩm (soft-delete, chỉ disabled hiển thị, không xóa data trong DB)
 - [ ] Hosting code
