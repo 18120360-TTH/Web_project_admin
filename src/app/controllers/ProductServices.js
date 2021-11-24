@@ -38,6 +38,46 @@ class ProductServices {
         })
     }
 
+    countAllSearchBooks(keyword) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const amount = models.books.count({
+                    where: {
+                        title: {
+                            [sequelize.Op.substring]: keyword
+                        }
+                    }
+                })
+                resolve(amount)
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+    getAllSearchBooks(keyword, page) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const offset = (page - 1) * 6
+                const books = models.books.findAll({
+                    raw: true,
+                    offset: offset,
+                    limit: 6,
+                    where: {
+                        title: {
+                            [sequelize.Op.substring]: keyword
+                        }
+                    }
+                })
+                resolve(books)
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
     getBookImages = (ID) => {
         return new Promise(async (resolve, reject) => {
             try {

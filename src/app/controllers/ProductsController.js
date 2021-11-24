@@ -36,14 +36,8 @@ class ProductsController {
         if (page == 1) { isPreValid = false }
         if (page == totalPage) { isNextValid = false }
 
-        const authorsList = await productServices.getAllAuthors()
-        const publishersList = await productServices.getAllPublishers()
-
         res.render('products/product-list', {
             books,
-            // Use for filter
-            authorsList,
-            publishersList,
             // Use for pagination
             path: "/products/product-list?page=",
             page,
@@ -60,8 +54,54 @@ class ProductsController {
     }
 
     // [GET] /products-detail
-    productDetail(req, res) {
-        res.render('products/product-detail')
+    async productSearch(req, res) {
+        // Calculate number of resulted pages
+        const numOfResults = await productServices.countAllSearchBooks(req.query.search)
+        const totalPage = Math.ceil(numOfResults / 6)
+
+        let page
+        // If user access products-list without page
+        if (req.query.page == undefined) {
+            page = 1
+        }
+        // If user access an invalid page
+        else if (req.query.page < 1 || req.query.page > totalPage || isNaN(req.query.page)) {
+            res.render('errors/404')
+        }
+        else {
+            page = req.query.page
+        }
+        // Get books list from database
+        const books = await productServices.getAllSearchBooks(req.query.search, page)
+
+        for (let i in books) {
+            const bookImgs = await productServices.getBookImages(books[i].book_id)
+            books[i].img_url = bookImgs[0].img_url
+
+        }
+
+        // On the first page, disable "Previous" and "First" button
+        // On the last page, disable "Next" and "Last" button
+        let isPreValid = true
+        let isNextValid = true
+        if (page == 1) { isPreValid = false }
+        if (page == totalPage) { isNextValid = false }
+
+        res.render('products/product-list', {
+            books,
+            // Use for pagination
+            path: "/products/products-searched?page=",
+            page,
+            prePage: parseInt(page) - 1,
+            nextPage: parseInt(page) + 1,
+            lastPage: totalPage,
+            isPreValid,
+            isNextValid,
+            // Use to indicate results order
+            firstIndex: (page - 1) * 6 + 1,
+            lastIndex: (page - 1) * 6 + books.length,
+            numOfResults
+        })
     }
 
     // [GET] /products-edit
