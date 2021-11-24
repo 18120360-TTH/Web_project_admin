@@ -10,6 +10,7 @@ sequelize.authenticate()
     const handlebars = require('express-handlebars');
     const path = require('path')
     const morgan = require('morgan')
+    const methodOverride = require('method-override')
     const app = express()
     const port = 3000
 
@@ -20,6 +21,9 @@ sequelize.authenticate()
 
     // HTTP loggers
     app.use(morgan('combined'))
+
+    //Method Override
+    app.use(methodOverride('_method'))
 
     // Template engine
     app.engine('hbs', handlebars({

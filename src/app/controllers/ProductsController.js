@@ -1,3 +1,4 @@
+const { SequelizeScopeError } = require('sequelize/dist')
 const productServices = require('./ProductServices')
 
 class ProductsController {
@@ -89,6 +90,33 @@ class ProductsController {
     addProduct(req, res) {
         res.render('products/add-product')
     }
+
+    //[POST] DELETE
+    async softdeleteProduct(req,res) {
+            //res.render('products/product-list')
+            let id = req.params.id
+            //await sleep(60000)
+            let isDeleted = await productServices.softdeleteBookByID(id)
+            res.redirect('/products/product-list')// Work the same as res.render('path') but i was too lazy to change
+    }
+
+    //[PUT] edit
+    //async editProduct(req,res){
+    //    let id = req.params.id
+     //   //let bookByID = await productServices.getBookByID(id)
+      //  res.json(req.body)
+       // console.log("active edit ")
+       // console.log(req.body)
+       // await sleep(60000)
+    //}
 }
+
+//function sleep(ms) {
+  //  return new Promise((resolve) => {
+    //    setTimeout(resolve,ms);
+    //})
+//}
+
+
 
 module.exports = new ProductsController
