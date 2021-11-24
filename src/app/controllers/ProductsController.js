@@ -29,6 +29,11 @@ class ProductsController {
 
         }
 
+        const authorsList = await productServices.getAllAuthors()
+        const publishersList = await productServices.getAllPublishers()
+
+        // console.log(authorsList)
+
         // On the first page, disable "Previous" and "First" button
         // On the last page, disable "Next" and "Last" button
         let isPreValid = true
@@ -38,6 +43,9 @@ class ProductsController {
 
         res.render('products/product-list', {
             books,
+            // Use for filter
+            authorsList,
+            publishersList,
             // Use for pagination
             path: "/products/product-list?page=",
             page,
