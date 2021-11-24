@@ -6,8 +6,8 @@ class ProductServices {
         return new Promise(async (resolve, reject) => {
             try {
                 const amount = models.books.count({
-                    where: { 
-                        is_deleted: false 
+                    where: {
+                        is_deleted: false
                     }
                 })
                 resolve(amount)
@@ -258,15 +258,16 @@ class ProductServices {
             }
         })
     }
-    softdeleteBookByID = (ID) => {
+    softDeleteBookByID = (ID) => {
         //Main idea: update attribute 'is_deleted' = true in table "books"
         return new Promise(async (resolve, reject) => {
             try {
-                const book = await models.books.update({ is_deleted : true },{
+                // const book = 
+                await models.books.update({ is_deleted: true }, {
                     raw: true,
-                    where: { book_id: ID}
+                    where: { book_id: ID }
                 })
-                resolve(book)
+                resolve("Book is deleted!")
             }
             catch (err) {
                 reject(err)
