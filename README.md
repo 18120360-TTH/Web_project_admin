@@ -16,6 +16,6 @@
 - [x] Hiển thị phân trang Products-list (tận dụng API của user-site)
 - [ ] Search trên trang Products-list
 - [x] Edit sản phẩm
-- [ ] Add sản phẩm mới (Dùng lại trang edit sản phẩm với data rỗng)
+- [x] Add sản phẩm mới (Dùng lại trang edit sản phẩm với data rỗng)
 - [ ] Xóa sản phẩm (soft-delete, chỉ disabled hiển thị, không xóa data trong DB)
 - [ ] Hosting code
