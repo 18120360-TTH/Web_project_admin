@@ -258,6 +258,7 @@ class ProductServices {
             }
         })
     }
+
     softDeleteBookByID = (ID) => {
         //Main idea: update attribute 'is_deleted' = true in table "books"
         return new Promise(async (resolve, reject) => {
@@ -268,6 +269,29 @@ class ProductServices {
                     where: { book_id: ID }
                 })
                 resolve("Book is deleted!")
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+    editBookByID = (ID, basicInfo, images) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                for (let i in images) {
+                    const img_url = '/images/products-images/' + images[i].originalname
+                    console.log("------------------------")
+                    console.log(img_url)
+                    console.log("------------------------")
+
+                    //Delete old-picture
+                    //Update URL
+                }
+
+                //code your update basic info
+
+                resolve("Book is updated!")
             }
             catch (err) {
                 reject(err)

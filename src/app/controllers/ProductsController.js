@@ -1,5 +1,7 @@
 const { SequelizeScopeError } = require('sequelize/dist')
 const productServices = require('./ProductServices')
+const multer = require('multer')
+const path = require('path')
 
 class ProductsController {
     // [GET] /products-list
@@ -31,8 +33,6 @@ class ProductsController {
 
         const authorsList = await productServices.getAllAuthors()
         const publishersList = await productServices.getAllPublishers()
-
-        // console.log(authorsList)
 
         // On the first page, disable "Previous" and "First" button
         // On the last page, disable "Next" and "Last" button
@@ -113,7 +113,7 @@ class ProductsController {
     }
 
     // [GET] /products-edit
-    async productEdit(req, res) {
+    async productEditView(req, res) {
         const bookByID = await productServices.getBookByID(req.query.ID)
         const bookImgs = await productServices.getBookImages(req.query.ID)
         const bookAuthors = await productServices.getBookAuthors(req.query.ID)
@@ -134,6 +134,35 @@ class ProductsController {
         }
     }
 
+    // [POST] /product-edit
+    async productEdit(req, res) {
+        let ID = req.params.id
+        if (parseInt(ID) < 10) { ID = '0' + ID }
+
+        const storage = multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, path.join(__dirname, '../../public/images/products_images'))
+            },
+            filename: function (req, file, callback) {
+                callback(null, ID + '-' + Date.now() + path.extname(file.originalname))
+            }
+        })
+
+        const upload = multer({ storage: storage }).array('book-img', 4)
+
+        upload(req, res, function (err) {
+            console.log("File uploaded");
+        })
+        // console.log("------------------------")
+        // console.log(req)
+        // console.log("------------------------")
+
+        await productServices.editBookByID(req.params.id, null, req.files)
+
+        res.redirect('/products/product-list')
+    }
+
+
     // [GET] /add-product
     addProduct(req, res) {
         res.render('products/add-product')
@@ -142,7 +171,6 @@ class ProductsController {
     //[POST] DELETE
     async softDeleteProduct(req, res) {
         let isDeleted = await productServices.softDeleteBookByID(req.params.id)
-        console.log(isDeleted)
         res.redirect('/products/product-list')
     }
 }
