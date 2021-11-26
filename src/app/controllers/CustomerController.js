@@ -1,8 +1,12 @@
 class CustomerController {
-    
+
     //[GET] /customer-list
-    customerList(req,res){
+    customerList(req, res) {
         res.render('customers/customers-list')
+    }
+
+    customerDetail(req, res) {
+        res.render('customers/customers-detail')
     }
 }
 
