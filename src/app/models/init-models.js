@@ -26,26 +26,26 @@ function initModels(sequelize) {
   orders.belongsToMany(books, { as: 'book_id_books_order_items', through: order_items, foreignKey: "order_id", otherKey: "book_id" });
   users.belongsToMany(books, { as: 'book_id_books', through: carts, foreignKey: "customer_username", otherKey: "book_id" });
   users.belongsToMany(books, { as: 'book_id_books_reviews', through: reviews, foreignKey: "customer_username", otherKey: "book_id" });
-  authors.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(authors, { as: "authors", foreignKey: "book_id"});
-  carts.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(carts, { as: "carts", foreignKey: "book_id"});
-  categories_of_book.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(categories_of_book, { as: "categories_of_books", foreignKey: "book_id"});
-  images.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(images, { as: "images", foreignKey: "book_id"});
-  order_items.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(order_items, { as: "order_items", foreignKey: "book_id"});
-  reviews.belongsTo(books, { as: "book", foreignKey: "book_id"});
-  books.hasMany(reviews, { as: "reviews", foreignKey: "book_id"});
-  order_items.belongsTo(orders, { as: "order", foreignKey: "order_id"});
-  orders.hasMany(order_items, { as: "order_items", foreignKey: "order_id"});
-  carts.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username"});
-  users.hasMany(carts, { as: "carts", foreignKey: "customer_username"});
-  orders.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username"});
-  users.hasMany(orders, { as: "orders", foreignKey: "customer_username"});
-  reviews.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username"});
-  users.hasMany(reviews, { as: "reviews", foreignKey: "customer_username"});
+  authors.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(authors, { as: "authors", foreignKey: "book_id" });
+  carts.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(carts, { as: "carts", foreignKey: "book_id" });
+  categories_of_book.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(categories_of_book, { as: "categories_of_book", foreignKey: "book_id" });
+  images.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(images, { as: "images", foreignKey: "book_id" });
+  order_items.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(order_items, { as: "order_items", foreignKey: "book_id" });
+  reviews.belongsTo(books, { as: "book", foreignKey: "book_id" });
+  books.hasMany(reviews, { as: "reviews", foreignKey: "book_id" });
+  order_items.belongsTo(orders, { as: "order", foreignKey: "order_id" });
+  orders.hasMany(order_items, { as: "order_items", foreignKey: "order_id" });
+  carts.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username" });
+  users.hasMany(carts, { as: "carts", foreignKey: "customer_username" });
+  orders.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username" });
+  users.hasMany(orders, { as: "orders", foreignKey: "customer_username" });
+  reviews.belongsTo(users, { as: "customer_username_user", foreignKey: "customer_username" });
+  users.hasMany(reviews, { as: "reviews", foreignKey: "customer_username" });
 
   return {
     authors,

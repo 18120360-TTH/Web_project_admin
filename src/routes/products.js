@@ -19,6 +19,9 @@ const router = express.Router()
 
 router.use('/product-list', ProductsController.productList)
 router.use('/products-searched', ProductsController.productSearch)
+router.use('/product-categorized', ProductsController.productCategory)
+router.use('/product-filtered', ProductsController.productFilter)
+
 router.use('/product-edit', ProductsController.productEditView)
 router.use('/add-product', ProductsController.addProduct)
 router.post('/delete/:id', ProductsController.softDeleteProduct)

@@ -1,28 +1,11 @@
 const { models } = require('../../config/db')
 const sequelize = require('sequelize')
 class ProductServices {
-
-    countAllBooks = () => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const amount = models.books.count({
-                    where: {
-                        is_deleted: false
-                    }
-                })
-                resolve(amount)
-            }
-            catch (err) {
-                reject(err)
-            }
-        })
-    }
-
     getAllBooks = (page) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
-                const books = models.books.findAll({
+                const result = await models.books.findAndCountAll({
                     raw: true,
                     offset: offset,
                     limit: 6,
@@ -30,7 +13,10 @@ class ProductServices {
                         is_deleted: false
                     }
                 })
-                resolve(books)
+                const books = result.rows
+                const count = result.count
+
+                resolve({ books, count })
             }
             catch (err) {
                 reject(err)
@@ -38,29 +24,11 @@ class ProductServices {
         })
     }
 
-    countAllSearchBooks(keyword) {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const amount = models.books.count({
-                    where: {
-                        title: {
-                            [sequelize.Op.substring]: keyword
-                        }
-                    }
-                })
-                resolve(amount)
-            }
-            catch (err) {
-                reject(err)
-            }
-        })
-    }
-
-    getAllSearchBooks(keyword, page) {
+    getSearchedBooks(keyword, page) {
         return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
-                const books = models.books.findAll({
+                const result = await models.books.findAndCountAll({
                     raw: true,
                     offset: offset,
                     limit: 6,
@@ -70,7 +38,11 @@ class ProductServices {
                         }
                     }
                 })
-                resolve(books)
+
+                const searchedBooks = result.rows
+                const count = result.count
+
+                resolve({ searchedBooks, count })
             }
             catch (err) {
                 reject(err)
@@ -78,7 +50,7 @@ class ProductServices {
         })
     }
 
-    getBookImages = (ID) => {
+    getImagesByBook = (ID) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const imgs = models.images.findAll({
@@ -95,7 +67,7 @@ class ProductServices {
         })
     }
 
-    getBookAuthors = (ID) => {
+    getAuthorsByBook = (ID) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const authors = models.authors.findAll({
@@ -159,98 +131,74 @@ class ProductServices {
             }
         })
     }
-    // min_price, max_price, author, publisher, language
+
+    getBooksByCategory = (category, page) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const offset = (page - 1) * 6
+                const result = await models.books.findAndCountAll({
+                    raw: true,
+                    offset: offset,
+                    limit: 6,
+                    where: { is_deleted: false },
+                    include: {
+                        model: models.categories_of_book,
+                        as: "categories_of_book",
+                        where: {
+                            category: category
+                        }
+                    }
+                })
+
+                const categorizedBooks = result.rows
+                const count = result.count
+
+                resolve({ categorizedBooks, count })
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
     getFilteredBook = (query, page) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
-                let filteredBooks
-                let count
-                if (query.author != undefined) {
-                    filteredBooks = await models.books.findAll({
-                        raw: true,
-                        offset: offset,
-                        limit: 6,
-                        where: { is_deleted: false },
-                        include: {
-                            model: models.authors,
-                            as: "authors",
-                            where: {
-                                author_name: query.author
-                            }
-                        },
-                    })
-                    count = await models.books.count({
-                        raw: true,
-                        include: {
-                            model: models.authors,
-                            as: "authors",
-                            where: {
-                                author_name: query.author
-                            }
-                        },
-                    })
-                }
-                else if (query.publisher != undefined) {
-                    filteredBooks = await models.books.findAll({
-                        raw: true,
-                        offset: offset,
-                        limit: 6,
-                        where: {
-                            publisher: query.publisher,
-                            is_deleted: false
-                        }
-                    })
-                    count = await models.books.count({
-                        raw: true,
-                        where: {
-                            publisher: query.publisher,
-                            is_deleted: false
-                        }
-                    })
-                }
-                else if (query.language != undefined) {
-                    filteredBooks = await models.books.findAll({
-                        raw: true,
-                        offset: offset,
-                        limit: 6,
-                        where: {
-                            language: query.language,
-                            is_deleted: false
-                        }
-                    })
-                    count = await models.books.count({
-                        raw: true,
-                        where: {
-                            language: query.language,
-                            is_deleted: false
-                        }
-                    })
-                }
-                else if (query.min_price != undefined && query.max_price != undefined) {
 
-                    filteredBooks = await models.books.findAll({
-                        raw: true,
-                        offset: offset,
-                        limit: 6,
-                        where: {
-                            price: {
-                                [sequelize.Op.between]: [query.min_price * 1000, query.max_price * 1000]
-                            },
-                            is_deleted: false
-                        }
-                    })
-
-                    count = await models.books.count({
-                        raw: true,
-                        where: {
-                            price: {
-                                [sequelize.Op.between]: [query.min_price * 1000, query.max_price * 1000]
-                            },
-                            is_deleted: false
-                        }
-                    })
+                // Without filter attributes, get all books in database
+                let optionQuery = {
+                    raw: true,
+                    offset: offset,
+                    limit: 6,
+                    where: { is_deleted: false }
                 }
+
+                // If any attribute is not equal to default value, add it to where clause
+                if (query.min_price != 0 || query.max_price != 1000) {
+                    optionQuery.where.price = {
+                        [sequelize.Op.between]: [query.min_price * 1000, query.max_price * 1000]
+                    }
+                }
+                if (query.publisher != "all") { optionQuery.where.publisher = query.publisher }
+                if (query.language != "all") { optionQuery.where.language = query.language }
+
+                // If author attribute is dedicated, add it to include clause
+                if (query.author != "all") {
+                    optionQuery.include = [{
+                        model: models.authors,
+                        as: "authors",
+                        where: { author_name: query.author }
+                    }]
+                }
+
+                console.log(optionQuery)
+
+                // Query to the database
+                const result = await models.books.findAndCountAll(optionQuery)
+                const filteredBooks = result.rows
+                const count = result.count
+
                 resolve({ filteredBooks, count })
             }
             catch (err) {
@@ -279,14 +227,40 @@ class ProductServices {
     editBookByID = (ID, basicInfo, images) => {
         return new Promise(async (resolve, reject) => {
             try {
-                for (let i in images) {
-                    const img_url = '/images/products-images/' + images[i].originalname
-                    console.log("------------------------")
-                    console.log(img_url)
-                    console.log("------------------------")
+                if (images.img_1 != undefined) {
+                    const img_url = '/images/products_images/' + images.img_1[0].filename
 
-                    //Delete old-picture
-                    //Update URL
+                    await models.images.update({ img_url: img_url }, {
+                        raw: true,
+                        where: { book_id: ID, img_order: 1 }
+                    })
+                }
+
+                if (images.img_2 != undefined) {
+                    const img_url = '/images/products-images/' + images.img_2[0].filename
+
+                    await models.images.update({ img_url: img_url }, {
+                        raw: true,
+                        where: { book_id: ID, img_order: 2 }
+                    })
+                }
+
+                if (images.img_3 != undefined) {
+                    const img_url = '/images/products-images/' + images.img_3[0].filename
+
+                    await models.images.update({ img_url: img_url }, {
+                        raw: true,
+                        where: { book_id: ID, img_order: 3 }
+                    })
+                }
+
+                if (images.img_4 != undefined) {
+                    const img_url = '/images/products-images/' + images.img_4[0].filename
+
+                    await models.images.update({ img_url: img_url }, {
+                        raw: true,
+                        where: { book_id: ID, img_order: 4 }
+                    })
                 }
 
                 //code your update basic info
