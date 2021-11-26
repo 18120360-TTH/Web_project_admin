@@ -145,6 +145,12 @@ class ProductsController {
         console.log(isDeleted)
         res.redirect('/products/product-list')
     }
+
+    async updateProduct(req,res){
+        let bookID = req.params.id
+        let isUpdate = await productServices.updateProductInfo(bookID,req.body)
+        res.redirect('/products/product-list')
+    }
 }
 
 module.exports = new ProductsController

@@ -1,5 +1,6 @@
 const { models } = require('../../config/db')
 const sequelize = require('sequelize')
+const { info } = require('node-sass')
 class ProductServices {
 
     countAllBooks = () => {
@@ -268,6 +269,35 @@ class ProductServices {
                     where: { book_id: ID }
                 })
                 resolve("Book is deleted!")
+            }
+            catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+    updateProductInfo = (ID,infoObject) => {
+        //infoObject is req.body
+        return new Promise(async (resolve, reject) => {
+            try {
+                await models.books.update(
+                    { title: infoObject.Title,
+                      ISBN: infoObject.isbn,
+                      release_year: infoObject.release_year,
+                      price: infoObject.sale_price,
+                      publisher: infoObject.publisher,
+                      number_of_pages: infoObject.page_num,
+                      language: infoObject.language
+                    }, 
+                    { raw: true,
+                    where: { book_id: ID }
+                })
+                await models.authors.update(
+                    { author_name: infoObject.Author}, 
+                    { raw: true,
+                    where: { book_id: ID }
+                })
+                resolve("Book is Update!")
             }
             catch (err) {
                 reject(err)

@@ -10,6 +10,6 @@ router.use('/add-product', ProductsController.addProduct)
 
 router.post('/delete/:id', ProductsController.softDeleteProduct)
 //router.put('/product-edit/:id', ProductsController.editProduct)
-//router.post('/edit/:id', ProductsController.editProduct)
+router.post('/edit/:id', ProductsController.updateProduct)
 
 module.exports = router

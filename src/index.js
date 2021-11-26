@@ -25,6 +25,10 @@ sequelize.authenticate()
     //Method Override
     //app.use(methodOverride('_method'))
 
+    //Middleware to get <form> data
+    app.use(express.urlencoded({extended: true}))
+    app.use(express.json())
+
     // Template engine
     app.engine('hbs', handlebars({
       extname: '.hbs',
@@ -42,3 +46,5 @@ sequelize.authenticate()
   .catch(error => {
     console.error('Unable to connect to the database:', error);
   })
+
+  
