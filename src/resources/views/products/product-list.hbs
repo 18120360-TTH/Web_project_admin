@@ -31,118 +31,77 @@
                         <div class="col-xl-3 col-lg-4">
                             <div class="card">
                                 <div class="card-header bg-transparent border-bottom">
-                                    <h5 class="mb-0">Filters</h5>
+                                    <h5 class="mt-2 mb-2 font-size-16">CATEGORIES</h5>
+                                    <form method="GET" action="/products/product-categorized">
+                                        <select class="form-control" name="category" id="category"
+                                            onchange="this.form.submit()">
+                                            <option value="all">All</option>
+                                            <option value="English learning">English learning</option>
+                                            <option value="Self-help">Self-help</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Short stories">Short stories</option>
+                                            <option value="Long story">Long story</option>
+                                        </select>
+                                    </form>
                                 </div>
 
-                                <div class="card-body">
-                                    <h5 class="font-size-14 mb-3">Categories</h5>
-
-                                    <div id="accordion" class="custom-accordion categories-accordion mb-3">
-                                        <a href="#collapseOne" class="categories-group-list waves-effect">
-                                            <i class="mdi mdi-book font-size-16 align-middle mr-2"></i>
-                                            English learning
-                                        </a>
-
-                                        <a href="#collapseOne" class="categories-group-list waves-effect">
-                                            <i class="mdi mdi-book font-size-16 align-middle mr-2"></i>
-                                            Self-help
-                                        </a>
-
-                                        <a href="#collapseOne" class="categories-group-list waves-effect">
-                                            <i class="mdi mdi-book font-size-16 align-middle mr-2"></i>
-                                            Business
-                                        </a>
-
-                                        <a href="#collapseOne" class="categories-group-list waves-effect">
-                                            <i class="mdi mdi-book font-size-16 align-middle mr-2"></i>
-                                            Short stories
-                                        </a>
-
-                                        <a href="#collapseOne" class="categories-group-list waves-effect">
-                                            <i class="mdi mdi-book font-size-16 align-middle mr-2"></i>
-                                            Long story
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="card-body border-top">
-                                    <div>
-                                        <h5 class="font-size-14 mb-4">Price range</h5>
-                                        <div class="d-flex justify-content-around">
-                                            <input class="col-5" type="number" id="min_price" name="min_price"
-                                                placeholder="Min price..." min="0" max="1000" value="0">
-                                            <input class="col-5" type="number" id="max_price" name="max_price"
-                                                placeholder="Max price..." min="0" max="1000" value="1000">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="custom-accordion">
-                                    <div class="card-body border-top">
-                                        <div>
-                                            <h5 class="font-size-14 mb-0"><a href="#collapseExample1"
-                                                    class="collapsed text-dark d-block" data-toggle="collapse">Authors
-                                                    <i class="mdi mdi-minus float-right accor-plus-icon"></i></a></h5>
-
-                                            <div class="collapse" id="collapseExample1">
-                                                <div class="mt-4">
-                                                    {{#each authorsList}}
-                                                    <a href="#collapseOne" class="categories-group-list waves-effect">
-                                                        <i
-                                                            class="mdi mdi-book-account font-size-16 align-middle mr-2"></i>
-                                                        {{author}}
-                                                    </a>
-                                                    {{/each}}
+                                <div class="card-header bg-transparent border-bottom">
+                                    <h5 class="mt-4 font-size-16">FILTER</h5>
+                                    <form method="GET" action="/products/product-filtered">
+                                        <div class="card-body border-top">
+                                            <div>
+                                                <h5 class="font-size-14 mb-2">Price range <span>(x1000 VNĐ)</span></h5>
+                                                <div class="d-flex justify-content-between">
+                                                    <input class="col-5" type="number" id="min_price" name="min_price"
+                                                        placeholder="Min price..." min="0" max="1000" value="0">
+                                                    <input class="col-5" type="number" id="max_price" name="max_price"
+                                                        placeholder="Max price..." min="0" max="1000" value="1000">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="card-body border-top">
-                                        <div>
-                                            <h5 class="font-size-14 mb-0"><a href="#collapseExample2"
-                                                    class="collapsed text-dark d-block"
-                                                    data-toggle="collapse">Publishers <i
-                                                        class="mdi mdi-minus float-right accor-plus-icon"></i></a></h5>
+                                        <div class="custom-accordion">
+                                            <div class="card-body border-top">
+                                                <div>
+                                                    <h5 class="font-size-14 mb-2">Authors </h5>
+                                                    <select class="form-control" name="author" id="author">
+                                                        <option value="all">All</option>
+                                                        {{#each authorsList}}
+                                                        <option value="{{author}}">{{author}}</option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                            <div class="collapse" id="collapseExample2">
-                                                <div class="mt-4">
-                                                    {{#each publishersList}}
-                                                    <a href="#collapseOne" class="categories-group-list waves-effect">
-                                                        <i
-                                                            class="mdi mdi-pencil-box-multiple font-size-16 align-middle mr-2"></i>
-                                                        {{publisher}}
-                                                    </a>
-                                                    {{/each}}
+                                            <div class="card-body border-top">
+                                                <div>
+                                                    <h5 class="font-size-14 mb-2">Publishers </h5>
+                                                    <select class="form-control" name="publisher" id="publisher">
+                                                        <option value="all">All</option>
+                                                        {{#each publishersList}}
+                                                        <option value="{{publisher}}">{{publisher}}</option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body border-top">
+                                                <div>
+                                                    <h5 class="font-size-14 mb-2">Languages </h5>
+                                                    <select class="form-control" name="language" id="language">
+                                                        <option value="all">All</option>
+                                                        <option value="English">English</option>
+                                                        <option value="Vietnamese">Vietnamese</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="card-body border-top">
-                                        <div>
-                                            <h5 class="font-size-14 mb-0"><a href="#collapseExample3"
-                                                    class="collapsed text-dark d-block" data-toggle="collapse">Languages
-                                                    <i class="mdi mdi-minus float-right accor-plus-icon"></i></a>
-                                            </h5>
-
-                                            <div class="collapse" id="collapseExample3">
-
-                                                <div class="mt-4">
-                                                    <a href="#collapseOne" class="categories-group-list waves-effect">
-                                                        <i class="mdi mdi-earth font-size-16 align-middle mr-2"></i>
-                                                        English
-                                                    </a>
-                                                    <a href="#collapseOne" class="categories-group-list waves-effect">
-                                                        <i class="mdi mdi-earth font-size-16 align-middle mr-2"></i>
-                                                        Vietnamese
-                                                    </a>
-                                                </div>
-
-                                            </div>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <button class="btn btn-primary" type="submit">Filter</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-lg-9">
@@ -153,7 +112,7 @@
                                             <div class="col-md-6">
                                                 <div>
                                                     <h5>Books</h5>
-                                                    <p>Show {{firstIndex}} - {{lastIndex}} of {{numOfResults}} results
+                                                    <p>Show {{firstIndex}} - {{lastIndex}} of {{count}} results
                                                     </p>
                                                 </div>
                                             </div>
@@ -224,7 +183,7 @@
                                                 <div>
                                                     <p class="mb-sm-0 mt-2">Page <span
                                                             class="font-weight-bold">{{page}}</span>
-                                                        Of <span class="font-weight-bold">{{lastPage}}</span></p>
+                                                        of <span class="font-weight-bold">{{lastPage}}</span></p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -333,4 +292,4 @@
     </div>
 </div>
 
-<script src="/js/pages/products-delete.js"></script>
+<script src="/js/custom_js/products-delete.js"></script>

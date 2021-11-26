@@ -178,42 +178,90 @@
                                                 </form>
                                             </div>
                                             <div class="tab-pane" id="product-img">
-                                                <form>
+                                                <form method='POST'
+                                                    action='/products/products-edit/{{bookByID.book_id}}'
+                                                    enctype="multipart/form-data">
                                                     <h4 class="card-title">Product Images</h4>
                                                     <p>Each product has a fixed number of photos of 4, when uploading a
-                                                        new
-                                                        photo, it will replace the old one</p>
+                                                        new photo, it will replace the old one</p>
                                                     <div class="product-color d-flex flex-wrap justify-content-between">
-                                                        {{#each bookImgs}}
-                                                        <span
-                                                            class="d-flex align-items-center justify-content-center mr-2">
+                                                        <div
+                                                            class="d-flex flex-column align-items-center justify-content-center">
                                                             <span>
                                                                 <a>
                                                                     <div class="product-color-item ">
-                                                                        <img src="{{img_url}}" width="200px" alt="">
+                                                                        <img id="img_01" src="{{bookByID.img_1}}"
+                                                                            width="200px" alt="">
                                                                     </div>
                                                                 </a>
                                                             </span>
-                                                            <span>
-                                                                <input id="formFileSm" type="file" />
-                                                            </span>
-                                                        </span>
-                                                        {{/each}}
-                                                    </div>
-                                                    {{!-- <form action="/" method="post" class="dropzone">
-                                                        <div class="fallback">
-                                                            <input name="file" type="file" multiple />
-                                                        </div>
-
-                                                        <div class="dz-message needsclick">
-                                                            <div class="mb-3">
-                                                                <i
-                                                                    class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            <div class="d-flex justify-content-center">
+                                                                <label class="custom-upload-btn waves-effect"
+                                                                    for="formFileSm1">
+                                                                    Select image 01
+                                                                    <input id="formFileSm1" type="file" name="img_1"
+                                                                        hidden />
+                                                                </label>
                                                             </div>
-
-                                                            <h4>Drop files here or click to upload.</h4>
                                                         </div>
-                                                    </form> --}}
+                                                        <div
+                                                            class="d-flex flex-column align-items-center justify-content-center">
+                                                            <span>
+                                                                <a>
+                                                                    <div class="product-color-item ">
+                                                                        <img id="img_02" src="{{bookByID.img_2}}"
+                                                                            width="200px" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </span>
+                                                            <div class="d-flex justify-content-center">
+                                                                <label class="custom-upload-btn waves-effect"
+                                                                    for="formFileSm2">
+                                                                    Select image 02
+                                                                    <input id="formFileSm2" type="file" name="img_2"
+                                                                        hidden />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex flex-column align-items-center justify-content-center">
+                                                            <span>
+                                                                <a>
+                                                                    <div class="product-color-item ">
+                                                                        <img id="img_03" src="{{bookByID.img_3}}"
+                                                                            width="200px" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </span>
+                                                            <div class="d-flex justify-content-center">
+                                                                <label class="custom-upload-btn waves-effect"
+                                                                    for="formFileSm3">
+                                                                    Select image 03
+                                                                    <input id="formFileSm3" type="file" name="img_3"
+                                                                        hidden />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex flex-column align-items-center justify-content-center">
+                                                            <span>
+                                                                <a>
+                                                                    <div class="product-color-item ">
+                                                                        <img id="img_04" src="{{bookByID.img_4}}"
+                                                                            width="200px" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </span>
+                                                            <div class="d-flex justify-content-center">
+                                                                <label class="custom-upload-btn waves-effect"
+                                                                    for="formFileSm4">
+                                                                    Select image 04
+                                                                    <input id="formFileSm4" type="file" name="img_4"
+                                                                        hidden />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="d-flex justify-content-center mt-4">
                                                         <button type="submit"
                                                             class="btn btn-primary mr-2 waves-effect waves-light">Update
@@ -256,3 +304,4 @@
         </div>
         <!-- END layout-wrapper -->
 </body>
+<script src="/js/custom_js/product-edit.js"></script>

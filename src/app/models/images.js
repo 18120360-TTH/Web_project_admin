@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('images', {
     img_url: {
       type: DataTypes.STRING(255),
@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'books',
         key: 'book_id'
       }
+    },
+    img_order: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
