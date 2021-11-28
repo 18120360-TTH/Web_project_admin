@@ -27,9 +27,8 @@ router.use('/add-product', ProductsController.addProduct)
 router.post('/delete/:id', ProductsController.softDeleteProduct)
 
 router.post('/products-edit/:id', ProductsController.productEdit)
-// upload.array('book-img', 4), 
+router.post('/products-add/new-product', ProductsController.newProductAdd)
 
 //router.put('/product-edit/:id', ProductsController.editProduct)
-router.post('/edit/:id', ProductsController.updateProduct)
 
 module.exports = router

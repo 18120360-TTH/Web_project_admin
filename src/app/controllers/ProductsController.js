@@ -321,7 +321,7 @@ class ProductsController {
             console.log("------------------------")
             console.log(req.files)
             console.log("------------------------")
-            await productServices.editBookByID(req.params.id, null, req.files)
+            await productServices.editBookByID(req.params.id, req.body, req.files)
         })
 
         res.redirect('/products/product-list')
@@ -339,11 +339,35 @@ class ProductsController {
         res.redirect('/products/product-list')
     }
 
-    async updateProduct(req,res){
-        let bookID = req.params.id
-        let isUpdate = await productServices.updateProductInfo(bookID,req.body)
+    async newProductAdd(req,res){
+        const ID = '00'
+
+        const storage = multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, path.join(__dirname, '../../public/images/products_images'))
+            },
+            filename: function (req, file, callback) {
+                callback(null, ID + '_' + Date.now() + path.extname(file.originalname))
+            }
+        })
+
+        const upload = multer({ storage: storage }).fields([
+            { name: 'img_1', maxCount: 1 },
+            { name: 'img_2', maxCount: 1 },
+            { name: 'img_3', maxCount: 1 },
+            { name: 'img_4', maxCount: 1 }
+        ])
+       
+        upload(req, res, async function (err) {
+            console.log("------------------------")
+            console.log(req.files)
+            console.log("------------------------")
+            const isaddProdct = await productServices.addNewProduct(req.body,req.files)
+        })
         res.redirect('/products/product-list')
     }
+
+
 }
 
 module.exports = new ProductsController
