@@ -339,7 +339,7 @@ class ProductsController {
         res.redirect('/products/product-list')
     }
 
-    async newProductAdd(req,res){
+    async newProductAdd(req, res) {
         const ID = '00'
 
         const storage = multer.diskStorage({
@@ -357,17 +357,15 @@ class ProductsController {
             { name: 'img_3', maxCount: 1 },
             { name: 'img_4', maxCount: 1 }
         ])
-       
+
         upload(req, res, async function (err) {
             console.log("------------------------")
             console.log(req.files)
             console.log("------------------------")
-            const isaddProdct = await productServices.addNewProduct(req.body,req.files)
+            const isaddProdct = await productServices.addNewProduct(req.body, req.files)
         })
         res.redirect('/products/product-list')
     }
-
-
 }
 
 module.exports = new ProductsController

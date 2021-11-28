@@ -1,5 +1,5 @@
-const ProductServices = require("../../../app/controllers/ProductServices")
-const authors = require("../../../app/models/authors")
+// const ProductServices = require("../../../app/controllers/ProductServices")
+// const authors = require("../../../app/models/authors")
 
 // Upload images preview
 formFileSm1.onchange = evt => {
@@ -26,15 +26,15 @@ formFileSm4.onchange = evt => {
         img_04.src = URL.createObjectURL(file)
     }
 }
-/*  $(document).ready(function () { 
+/*  $(document).ready(function () {
     Title.oninput = evt => {
         console.log("onInputTitle !!!!")
     }
 });  */
-/* $(document).ready( function() {  
+/* $(document).ready( function() {
     $('#Author').on('input',function(event) {
         console.log("onInputTitle !!!!")
-    }); 
+    });
 }); */
 
 //document.addEventListener('DOMContentLoaded', function () {
@@ -45,10 +45,10 @@ formFileSm4.onchange = evt => {
   //  $('#Author').on('input',function(event){
     //    console.log("onAuthorInputTitle !!!!")
      // });
-    /* btnDeleteProduct.onclick = function () {
-        deleteForm.action = '/products/delete/' + bookID;
-        deleteForm.submit();
-    } */
+/* btnDeleteProduct.onclick = function () {
+    deleteForm.action = '/products/delete/' + bookID;
+    deleteForm.submit();
+} */
 //});
 //Basic info validation
 /* $('#Title').on('input',function(){
@@ -59,14 +59,14 @@ formFileSm4.onchange = evt => {
         console.log("onInputTitle !!!!")
       });
 }); */
- /* Title.onchange = evt => {
-    console.log("onchange ACTIVE")
-    if (document.getElementById('Title').value === ""){
-        document.getElementById('TitleValidation').innerHTML = "Please enter title of book"
-    }
-    else{
-        document.getElementById('TitleValidation').innerHTML = "Okay"
-    }
+/* Title.onchange = evt => {
+   console.log("onchange ACTIVE")
+   if (document.getElementById('Title').value === ""){
+       document.getElementById('TitleValidation').innerHTML = "Please enter title of book"
+   }
+   else{
+       document.getElementById('TitleValidation').innerHTML = "Okay"
+   }
 }  */
 
 /* document.addEventListener('DOMContentLoaded', function () {

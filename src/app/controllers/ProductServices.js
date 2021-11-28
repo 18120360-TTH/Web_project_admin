@@ -1,7 +1,6 @@
 const { models } = require('../../config/db')
 const sequelize = require('sequelize')
-const { info } = require('node-sass')
-const { updateProduct } = require('./ProductsController')
+
 class ProductServices {
     getAllBooks = (page) => {
         return new Promise(async (resolve, reject) => {
@@ -267,22 +266,25 @@ class ProductServices {
 
                 //code your update basic info
                 await models.books.update(
-                    { title: basicInfo.Title,
-                      ISBN: basicInfo.isbn,
-                      release_year: basicInfo.release_year,
-                      price: basicInfo.sale_price,
-                      publisher: basicInfo.publisher,
-                      number_of_pages: basicInfo.page_num,
-                      language: basicInfo.language
-                    }, 
-                    { raw: true,
-                    where: { book_id: ID }
-                })
+                    {
+                        title: basicInfo.Title,
+                        ISBN: basicInfo.isbn,
+                        release_year: basicInfo.release_year,
+                        price: basicInfo.sale_price,
+                        publisher: basicInfo.publisher,
+                        number_of_pages: basicInfo.page_num,
+                        language: basicInfo.language
+                    },
+                    {
+                        raw: true,
+                        where: { book_id: ID }
+                    })
                 await models.authors.update(
-                    { author_name: basicInfo.Author}, 
-                    { raw: true,
-                    where: { book_id: ID }
-                })
+                    { author_name: basicInfo.Author },
+                    {
+                        raw: true,
+                        where: { book_id: ID }
+                    })
 
                 resolve("Book is updated!")
             }
@@ -292,13 +294,13 @@ class ProductServices {
         })
     }
 
-    findMaxBookID = () =>{
+    findMaxBookID = () => {
         return new Promise(async (resolve, reject) => {
             try {
                 const result = models.books.findAll({
                     raw: true,
                     nest: true,
-                    attributes: [[sequelize.fn('max', sequelize.col('book_id')),'book_id']],
+                    attributes: [[sequelize.fn('max', sequelize.col('book_id')), 'book_id']],
                     //attributes: [[sequelize.fn('DISTINCT', sequelize.col('author_name')), 'author']]
                 })
                 const max_cur_book_id = result
@@ -348,34 +350,38 @@ class ProductServices {
                         where: { book_id: ID, img_order: 4 }
                     })
                 }
-                
+
                 //code your update basic info
                 const max_book_id_object = await this.findMaxBookID()
-                const max_id = Math.max(parseInt(max_book_id_object[0].book_id),0) 
+                const max_id = Math.max(parseInt(max_book_id_object[0].book_id), 0)
 
                 const sale_price = basicInfo.sale_price || 50000
 
                 await models.books.create(
-                    { book_id: max_id + 1,
-                      title: (basicInfo.Title || "New Title 2"), //value for not null attribute
-                      ISBN: (basicInfo.isbn || 555555), //value for not null attribute
-                      release_year: basicInfo.release_year,
-                      price: sale_price,
-                      publisher: basicInfo.publisher,
-                      number_of_pages: (basicInfo.page_num || null),
-                      language: basicInfo.language,
-                      description: basicInfo.productDesc //not sure if can create
-                    }, 
-                    { raw: true
-                })
-                
+                    {
+                        book_id: max_id + 1,
+                        title: (basicInfo.Title || "New Title 2"), //value for not null attribute
+                        ISBN: (basicInfo.isbn || 555555), //value for not null attribute
+                        release_year: basicInfo.release_year,
+                        price: sale_price,
+                        publisher: basicInfo.publisher,
+                        number_of_pages: (basicInfo.page_num || null),
+                        language: basicInfo.language,
+                        description: basicInfo.productDesc //not sure if can create
+                    },
+                    {
+                        raw: true
+                    })
+
                 await models.authors.create(
-                    { author_name: basicInfo.Author,
+                    {
+                        author_name: basicInfo.Author,
                         book_id: max_id + 1
-                    }, 
-                    { raw: true,
-             
-                })
+                    },
+                    {
+                        raw: true,
+
+                    })
 
                 resolve("Book is create!")
             }
