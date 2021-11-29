@@ -45,9 +45,7 @@ class ProductServices {
 
                 resolve({ searchedBooks, count })
             }
-            catch (err) {
-                reject(err)
-            }
+            catch (err) { reject(err) }
         })
     }
 
@@ -56,15 +54,11 @@ class ProductServices {
             try {
                 const imgs = models.images.findAll({
                     raw: true,
-                    where: {
-                        book_id: ID
-                    }
+                    where: { book_id: ID }
                 })
                 resolve(imgs)
             }
-            catch (err) {
-                reject(err)
-            }
+            catch (err) { reject(err) }
         })
     }
 
@@ -79,9 +73,20 @@ class ProductServices {
                 })
                 resolve(authors)
             }
-            catch (err) {
-                reject(err)
+            catch (err) { reject(err) }
+        })
+    }
+
+    getCategoriesByBook = (ID) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const categories = models.categories_of_book.findAll({
+                    raw: true,
+                    where: { book_id: ID }
+                })
+                resolve(categories)
             }
+            catch (err) { reject(err) }
         })
     }
 
@@ -94,9 +99,7 @@ class ProductServices {
                 })
                 resolve(authorsList)
             }
-            catch (err) {
-                reject(err)
-            }
+            catch (err) { reject(err) }
         })
     }
 
@@ -193,8 +196,6 @@ class ProductServices {
                     }]
                 }
 
-                console.log(optionQuery)
-
                 // Query to the database
                 const result = await models.books.findAndCountAll(optionQuery)
                 const filteredBooks = result.rows
@@ -228,6 +229,56 @@ class ProductServices {
     editBookByID = (ID, basicInfo, images) => {
         return new Promise(async (resolve, reject) => {
             try {
+                // Update data in books table
+                await models.books.update({
+                    title: basicInfo.title,
+                    ISBN: basicInfo.isbn,
+                    release_year: basicInfo.release_year,
+                    price: basicInfo.sale_price,
+                    publisher: basicInfo.publisher,
+                    number_of_pages: basicInfo.page_num,
+                    language: basicInfo.language,
+                    quantity_in_stock: basicInfo.quantity
+                }, {
+                    raw: true,
+                    where: { book_id: ID }
+                })
+
+                // Update data in authors table
+                const authorArr = basicInfo.author.split(', ');
+
+                await models.authors.destroy({
+                    where: { book_id: ID }
+                })
+
+                for (let i in authorArr) {
+                    await models.authors.create({
+                        author_name: authorArr[i],
+                        book_id: ID
+                    }, { raw: true })
+                }
+
+                // Update data in categories_of_books table
+                await models.categories_of_book.destroy({
+                    where: { book_id: ID }
+                })
+
+                await models.categories_of_book.create({
+                    category: basicInfo.category_01,
+                    book_id: ID
+                }, { raw: true })
+
+                // console.log("------------------------")
+                // console.log(basicInfo)
+                // console.log("------------------------")
+
+                if (basicInfo.category_02 != "None" && basicInfo.category_02 != basicInfo.category_01) {
+                    await models.categories_of_book.create({
+                        category: basicInfo.category_02,
+                        book_id: ID
+                    }, { raw: true })
+                }
+
                 if (images.img_1 != undefined) {
                     const img_url = '/images/products_images/' + images.img_1[0].filename
 
@@ -263,28 +314,6 @@ class ProductServices {
                         where: { book_id: ID, img_order: 4 }
                     })
                 }
-
-                //code your update basic info
-                await models.books.update(
-                    {
-                        title: basicInfo.Title,
-                        ISBN: basicInfo.isbn,
-                        release_year: basicInfo.release_year,
-                        price: basicInfo.sale_price,
-                        publisher: basicInfo.publisher,
-                        number_of_pages: basicInfo.page_num,
-                        language: basicInfo.language
-                    },
-                    {
-                        raw: true,
-                        where: { book_id: ID }
-                    })
-                await models.authors.update(
-                    { author_name: basicInfo.Author },
-                    {
-                        raw: true,
-                        where: { book_id: ID }
-                    })
 
                 resolve("Book is updated!")
             }
@@ -297,14 +326,15 @@ class ProductServices {
     findMaxBookID = () => {
         return new Promise(async (resolve, reject) => {
             try {
-                const result = models.books.findAll({
+                const result = await models.books.findAll({
                     raw: true,
                     nest: true,
                     attributes: [[sequelize.fn('max', sequelize.col('book_id')), 'book_id']],
-                    //attributes: [[sequelize.fn('DISTINCT', sequelize.col('author_name')), 'author']]
                 })
-                const max_cur_book_id = result
-                resolve(max_cur_book_id)
+
+                const max_book_id = Math.max(parseInt(result[0].book_id), 0)
+
+                resolve(max_book_id)
             }
             catch (err) {
                 reject(err)
@@ -315,73 +345,80 @@ class ProductServices {
     addNewProduct = (basicInfo, images) => {
         return new Promise(async (resolve, reject) => {
             try {
+                const max_id = await this.findMaxBookID()
+
+                // Create new book must be first because of Foreign-key
+                await models.books.create({
+                    book_id: max_id + 1,
+                    title: (basicInfo.title || "New Title 2"), //value for not null attribute
+                    ISBN: (basicInfo.isbn || 555555), //value for not null attribute
+                    release_year: basicInfo.release_year,
+                    price: (basicInfo.sale_price || 50000),
+                    publisher: basicInfo.publisher,
+                    number_of_pages: (basicInfo.page_num || null),
+                    language: basicInfo.language,
+                    description: basicInfo.productDesc //not sure if can create
+                }, { raw: true })
+
+                // Create author rows in authors table
+                const authorArr = basicInfo.author.split(', ');
+
+                for (let i in authorArr) {
+                    await models.authors.create({
+                        author_name: authorArr[i],
+                        book_id: max_id + 1
+                    }, { raw: true })
+                }
+
+                // Create category rows in categories_of_books table (max 2 of each book)
+                await models.categories_of_book.create({
+                    category: basicInfo.category_01,
+                    book_id: max_id + 1
+                }, { raw: true })
+
+                if (basicInfo.category_02 != "None" && basicInfo.category_02 != basicInfo.category_01) {
+                    await models.categories_of_book.create({
+                        category: basicInfo.category_02,
+                        book_id: max_id + 1
+                    }, { raw: true })
+                }
+
+                // Create image_url rows in images table (fixed 4 of each book)
                 if (images.img_1 != undefined) {
                     const img_url = '/images/products_images/' + images.img_1[0].filename
-
-                    await models.images.update({ img_url: img_url }, {
-                        raw: true,
-                        where: { book_id: ID, img_order: 1 }
-                    })
-                }
-
-                if (images.img_2 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_2[0].filename
-
-                    await models.images.update({ img_url: img_url }, {
-                        raw: true,
-                        where: { book_id: ID, img_order: 2 }
-                    })
-                }
-
-                if (images.img_3 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_3[0].filename
-
-                    await models.images.update({ img_url: img_url }, {
-                        raw: true,
-                        where: { book_id: ID, img_order: 3 }
-                    })
-                }
-
-                if (images.img_4 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_4[0].filename
-
-                    await models.images.update({ img_url: img_url }, {
-                        raw: true,
-                        where: { book_id: ID, img_order: 4 }
-                    })
-                }
-
-                //code your update basic info
-                const max_book_id_object = await this.findMaxBookID()
-                const max_id = Math.max(parseInt(max_book_id_object[0].book_id), 0)
-
-                const sale_price = basicInfo.sale_price || 50000
-
-                await models.books.create(
-                    {
+                    await models.images.create({
+                        img_url: img_url,
                         book_id: max_id + 1,
-                        title: (basicInfo.Title || "New Title 2"), //value for not null attribute
-                        ISBN: (basicInfo.isbn || 555555), //value for not null attribute
-                        release_year: basicInfo.release_year,
-                        price: sale_price,
-                        publisher: basicInfo.publisher,
-                        number_of_pages: (basicInfo.page_num || null),
-                        language: basicInfo.language,
-                        description: basicInfo.productDesc //not sure if can create
-                    },
-                    {
-                        raw: true
-                    })
+                        img_order: 1
+                    }, { raw: true })
+                }
+                if (images.img_2 != undefined) {
+                    const img_url = '/images/products_images/' + images.img_2[0].filename
 
-                await models.authors.create(
-                    {
-                        author_name: basicInfo.Author,
-                        book_id: max_id + 1
-                    },
-                    {
-                        raw: true,
+                    await models.images.create({
+                        book_id: max_id + 1,
+                        img_url: img_url,
+                        img_order: 2
+                    }, { raw: true })
+                }
+                if (images.img_3 != undefined) {
+                    const img_url = '/images/products_images/' + images.img_3[0].filename
 
-                    })
+                    await models.images.create({
+                        book_id: max_id + 1,
+                        img_url: img_url,
+                        img_order: 3
+                    }, { raw: true })
+                }
+                if (images.img_4 != undefined) {
+                    const img_url = '/images/products_images/' + images.img_4[0].filename
+
+                    await models.images.create({
+                        book_id: max_id + 1,
+                        img_url: img_url,
+                        img_order: 4
+                    }, { raw: true })
+                }
 
                 resolve("Book is create!")
             }

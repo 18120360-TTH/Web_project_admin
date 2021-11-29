@@ -153,8 +153,8 @@
                                             <div class="col-xl-4 col-sm-6">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        <div class="product-ribbon badge badge-warning">
-                                                            Trending
+                                                        <div class="product-ribbon badge badge-primary">
+                                                            -25%
                                                         </div>
                                                         <div class="product-like">
                                                             <a href="#"
@@ -164,16 +164,23 @@
                                                                 <i class="mdi mdi-trash-can-outline"></i>
                                                             </a>
                                                         </div>
-                                                        <img src="{{img_url}}" alt="" class="img-fluid mx-auto d-block">
+                                                        <a href="/products/product-edit?ID={{book_id}}">
+                                                            <img src="{{img_url}}" alt=""
+                                                                class="img-fluid mx-auto d-block">
+                                                        </a>
                                                     </div>
 
                                                     <div class="text-center mt-2">
                                                         <h5 class="font-size-17">
                                                             <a href="/products/product-edit?ID={{book_id}}"
-                                                                class="text-dark">{{title}}</a>
+                                                                class="text-primary">{{title}}</a>
                                                         </h5>
-
-                                                        <h5 class="font-size-15 mt-3 mb-0 text-primary">{{price}}đ</h5>
+                                                        <div class="d-flex justify-content-center mt-3">
+                                                            <h5 class="font-size-16 text-muted mr-2">
+                                                                <del>{{origin_price}}đ</del>
+                                                            </h5>
+                                                            <h5 class="font-size-16 text-danger">{{price}}đ</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

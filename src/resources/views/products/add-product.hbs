@@ -48,33 +48,40 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content twitter-bs-wizard-tab-content">
-                                            <div class="tab-pane" id="basic-info">
-                                                <h4 class="card-title">Basic Information</h4>
-                                                <p class="card-title-desc">Fill all information below</p>
+                                            <form method="POST" action="/products/products-add/new-product"
+                                                enctype="multipart/form-data">
+                                                <div class="tab-pane" id="basic-info">
+                                                    <h4 class="card-title">Basic Information</h4>
+                                                    <p class="card-title-desc text-danger">Please fill all information
+                                                        below</p>
 
-                                                <form method="POST" action="/products/products-add/new-product"
-                                                    enctype="multipart/form-data">
                                                     <div class="row">
                                                         <div class="col-lg-5">
                                                             <div class="form-group">
-                                                                <label for="Title">Book title</label>
-                                                                <input id="Title" name="Title" type="text"
-                                                                    class="form-control" placeholder="Quán gò đi lên">
-                                                                <div id="TitleValidation"></div>
+                                                                <label for="title">Book title <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input id="title" name="title" type="text"
+                                                                    class="form-control" placeholder="Quán gò đi lên"
+                                                                    required>
+                                                                <div id="titleValidation"></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
-                                                                <label for="Author">Author</label>
-                                                                <input id="Author" name="Author" type="text"
-                                                                    class="form-control" placeholder="Nguyễn Nhật Ánh">
+                                                                <label for="author">Author <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input id="author" name="author" type="text"
+                                                                    class="form-control" placeholder="Nguyễn Nhật Ánh"
+                                                                    required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="publisher">Publisher</label>
+                                                                <label for="publisher">Publisher <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input id="publisher" name="publisher" type="text"
-                                                                    class="form-control" placeholder="NXB Tuổi Trẻ">
+                                                                    class="form-control" placeholder="NXB Tuổi Trẻ"
+                                                                    required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,40 +89,48 @@
                                                     <div class="row">
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="isbn">ISBN</label>
+                                                                <label for="isbn">ISBN <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input id="isbn" name="isbn" type="text"
                                                                     class="form-control"
-                                                                    placeholder="978-3-16-148410-...">
+                                                                    placeholder="978-3-16-148410-..." required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="realese-year">Release year</label>
-                                                                <input id="realese-year" name="realese_year"
-                                                                    type="number" class="form-control" value="" min="0"
-                                                                    max="2099" placeholder="2010">
+                                                                <label for="release-year">Release year <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input id="release-year" name="release_year"
+                                                                    type="number" class="form-control" min="1500"
+                                                                    max="2099" placeholder="2010" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="price">Original price</label>
-                                                                <input id="price" name="price" type="number" min="0"
-                                                                    placeholder="260.000đ" class="form-control">
+                                                                <label for="price">Original price <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input id="price" name="price" type="number" min="1000"
+                                                                    placeholder="260.000đ" class="form-control"
+                                                                    required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="sale-price">Promotion price</label>
+                                                                <label for="sale-price">Promotion price <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input id="sale-price" name="sale_price" type="number"
-                                                                    min="0" placeholder="300.000đ" class="form-control">
+                                                                    min="1000" placeholder="300.000đ"
+                                                                    class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label class="control-label">Category 01</label>
-                                                                <select class="form-control select2">
+                                                                <label class="control-label">Category 01 <span
+                                                                        class="text-danger">*</span></label>
+                                                                <select class="form-control select2" name="category_01"
+                                                                    required>
                                                                     <option value="English learning">English learning
                                                                     </option>
                                                                     <option value="Self-help">Self-help</option>
@@ -128,7 +143,9 @@
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label class="control-label">Category 02</label>
-                                                                <select class="form-control select2">
+                                                                <select class="form-control select2" name="category_02">
+                                                                    <option value="None" selected="selected">None
+                                                                    </option>
                                                                     <option value="English learning">English learning
                                                                     </option>
                                                                     <option value="Self-help">Self-help</option>
@@ -139,47 +156,39 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
-
                                                             <div class="form-group">
-                                                                <label for="page-num">Number of pages</label>
+                                                                <label for="page-num">Number of pages <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input id="page-num" name="page_num" type="number"
-                                                                    class="form-control" placeholder="1000, 200, ...">
+                                                                    class="form-control" placeholder="1000, 200, ..."
+                                                                    required>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
-
                                                             <div class="form-group">
-                                                                <label for="language">Language</label>
+                                                                <label for="language">Language <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input id="language" name="language" type="text"
                                                                     class="form-control"
-                                                                    placeholder="English, vietnamese">
+                                                                    placeholder="English, vietnamese" required>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="productDesc">Product Description</label>
+                                                        <label for="productDesc">Product Description
+                                                            <span class="text-danger">*</span></label>
                                                         <textarea class="form-control" id="productDesc"
-                                                            name="productDesc" rows="5">
-                                                        </textarea>
+                                                            name="productDesc" rows="5"
+                                                            placeholder="Write some description for the book..."
+                                                            required></textarea>
                                                     </div>
-                                                    <div class="d-flex justify-content-center">
-                                                        <button type="submit"
-                                                            class="btn btn-primary mr-2 waves-effect waves-light">
-                                                            Save Changes
-                                                        </button>
+                                                </div>
+                                                <div class="tab-pane mt-4" id="product-img">
 
-                                                        <a class="btn btn-secondary waves-effect"
-                                                            href="/products/product-list">Cancel</a>
-
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="tab-pane" id="product-img">
-                                                <form method='POST' action='/products/products-add/new-product'
-                                                    enctype="multipart/form-data">
-                                                    <h4 class="card-title">Product Images</h4>
-                                                    <p>Each product has a fixed number of photos of 4, when uploading a
-                                                        new photo, it will replace the old one</p>
+                                                    <h4 class="card-title">Product Images <span
+                                                            class="text-danger">*</span></h4>
+                                                    <p class="text-danger">Each product has a fixed number of photos of
+                                                        4. Please up load all 4 photos</p>
                                                     <div class="product-color d-flex flex-wrap justify-content-between">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center">
@@ -197,7 +206,7 @@
                                                                     for="formFileSm1">
                                                                     Select image 01
                                                                     <input id="formFileSm1" type="file" name="img_1"
-                                                                        hidden />
+                                                                        hidden required />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -217,7 +226,7 @@
                                                                     for="formFileSm2">
                                                                     Select image 02
                                                                     <input id="formFileSm2" type="file" name="img_2"
-                                                                        hidden />
+                                                                        hidden required />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -237,7 +246,7 @@
                                                                     for="formFileSm3">
                                                                     Select image 03
                                                                     <input id="formFileSm3" type="file" name="img_3"
-                                                                        hidden />
+                                                                        hidden required />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -257,21 +266,21 @@
                                                                     for="formFileSm4">
                                                                     Select image 04
                                                                     <input id="formFileSm4" type="file" name="img_4"
-                                                                        hidden />
+                                                                        hidden required />
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex justify-content-center mt-4">
-                                                        <button type="submit"
-                                                            class="btn btn-primary mr-2 waves-effect waves-light">
-                                                            Save changes</button>
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-5">
+                                                    <button type="submit"
+                                                        class="btn btn-primary mr-2 waves-effect waves-light">
+                                                        Add book</button>
 
-                                                        <a class="btn btn-secondary waves-effect"
-                                                            href="/products/product-list">Cancel</a>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                    <a class="btn btn-secondary waves-effect"
+                                                        href="/products/product-list">Cancel</a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

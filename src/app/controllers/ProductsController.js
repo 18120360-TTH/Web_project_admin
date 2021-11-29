@@ -273,6 +273,7 @@ class ProductsController {
         const bookByID = await productServices.getBookByID(req.query.ID)
         const bookImgs = await productServices.getImagesByBook(req.query.ID)
         const bookAuthors = await productServices.getAuthorsByBook(req.query.ID)
+        const bookCategories = await productServices.getCategoriesByBook(req.query.ID)
 
         let authors = bookAuthors[0].author_name
         for (let i in bookAuthors) {
@@ -282,17 +283,19 @@ class ProductsController {
         }
         bookByID.authors = authors
 
+        bookByID.category_01 = bookCategories[0].category
+        if (bookCategories.length > 1) {
+            bookByID.category_02 = bookCategories[1].category
+        }
+
         for (let i in bookImgs) {
             bookByID['img_' + bookImgs[i].img_order] = bookImgs[i].img_url
         }
 
-        console.log(bookByID)
-
         if (bookByID == null) {
             res.render('errors/404')
-        }
-        else {
-            res.render('products/product-edit', { bookByID, bookImgs })
+        } else {
+            res.render('products/product-edit', { bookByID, bookCategories })
         }
     }
 
@@ -318,29 +321,26 @@ class ProductsController {
         ])
 
         upload(req, res, async function (err) {
-            console.log("------------------------")
-            console.log(req.files)
-            console.log("------------------------")
             await productServices.editBookByID(req.params.id, req.body, req.files)
         })
 
         res.redirect('/products/product-list')
     }
 
-
     // [GET] /add-product
     addProduct(req, res) {
         res.render('products/add-product')
     }
 
-    //[POST] DELETE
+    //[POST] /products/products-list/delete
     async softDeleteProduct(req, res) {
         let isDeleted = await productServices.softDeleteBookByID(req.params.id)
         res.redirect('/products/product-list')
     }
 
+    //[POST] /products/products-list/add-product
     async newProductAdd(req, res) {
-        const ID = '00'
+        const ID = await productServices.findMaxBookID() + 1
 
         const storage = multer.diskStorage({
             destination: function (req, file, callback) {
@@ -359,10 +359,7 @@ class ProductsController {
         ])
 
         upload(req, res, async function (err) {
-            console.log("------------------------")
-            console.log(req.files)
-            console.log("------------------------")
-            const isaddProdct = await productServices.addNewProduct(req.body, req.files)
+            await productServices.addNewProduct(req.body, req.files)
         })
         res.redirect('/products/product-list')
     }

@@ -28,7 +28,7 @@ sequelize.authenticate()
     //app.use(methodOverride('_method'))
 
     //Middleware to get <form> data
-    app.use(express.urlencoded({extended: true}))
+    app.use(express.urlencoded({ extended: true }))
     app.use(express.json())
 
     // Template engine
@@ -37,6 +37,15 @@ sequelize.authenticate()
     }));
     app.set('view engine', 'hbs');
     app.set('views', path.join(__dirname, 'resources/views'))
+
+    // Handlebars register
+    let hbs = handlebars.create({});
+    // Keep selected value in pagination
+    hbs.handlebars.registerHelper('select', function (selected, options) {
+      return options.fn(this).replace(
+        new RegExp(' value=\"' + selected + '\"'),
+        '$& selected="selected"');
+    });
 
     // Routing
     route(app)
@@ -49,4 +58,3 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', error);
   })
 
-  
