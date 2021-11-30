@@ -107,20 +107,20 @@
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
-                                                                <label for="price">Original price <span
-                                                                        class="text-danger">*</span></label>
-                                                                <input id="price" name="price" type="number" min="0"
-                                                                    value="{{bookByID.origin_price}}"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
                                                                 <label for="sale-price">Promotion price <span
                                                                         class="text-danger">*</span></label>
                                                                 <input id="sale-price" name="sale_price" type="number"
                                                                     min="0" value="{{bookByID.price}}"
                                                                     class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label for="quantity">Quantity <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input id="quantity" name="quantity" type="text"
+                                                                    class="form-control"
+                                                                    value="{{bookByID.quantity_in_stock}}" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -137,6 +137,9 @@
                                                                     <option value="Business">Business</option>
                                                                     <option value="Short stories">Short stories</option>
                                                                     <option value="Long story">Long story</option>
+                                                                    <option value="Information Technology">Information
+                                                                        Technology</option>
+                                                                    <option value="Manga">Manga</option>
                                                                     {{/select}}
                                                                 </select>
                                                             </div>
@@ -153,11 +156,14 @@
                                                                     <option value="Business">Business</option>
                                                                     <option value="Short stories">Short stories</option>
                                                                     <option value="Long story">Long story</option>
+                                                                    <option value="Information Technology">Information
+                                                                        Technology</option>
+                                                                    <option value="Manga">Manga</option>
                                                                     {{/select}}
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-2">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="page-num">Number of pages <span
                                                                         class="text-danger">*</span></label>
@@ -166,7 +172,7 @@
                                                                     value="{{bookByID.number_of_pages}}" required>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-2">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="language">Language <span
                                                                         class="text-danger">*</span></label>
@@ -175,15 +181,7 @@
                                                                     required>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label for="quantity">Quantity <span
-                                                                        class="text-danger">*</span></label>
-                                                                <input id="quantity" name="quantity" type="text"
-                                                                    class="form-control"
-                                                                    value="{{bookByID.quantity_in_stock}}" required>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productDesc">Product Description <span

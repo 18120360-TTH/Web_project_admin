@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('categories_of_book', {
     category: {
-      type: DataTypes.ENUM('English learning','Self-help','Business','Short stories','Long story'),
+      type: DataTypes.ENUM('English learning', 'Self-help', 'Business', 'Short stories', 'Long story', 'Information Technology', 'Manga'),
       allowNull: false,
       primaryKey: true
     },

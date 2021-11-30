@@ -268,9 +268,9 @@ class ProductServices {
                     book_id: ID
                 }, { raw: true })
 
-                // console.log("------------------------")
-                // console.log(basicInfo)
-                // console.log("------------------------")
+                console.log("------------------------")
+                console.log(images)
+                console.log("------------------------")
 
                 if (basicInfo.category_02 != "None" && basicInfo.category_02 != basicInfo.category_01) {
                     await models.categories_of_book.create({
@@ -289,7 +289,7 @@ class ProductServices {
                 }
 
                 if (images.img_2 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_2[0].filename
+                    const img_url = '/images/products_images/' + images.img_2[0].filename
 
                     await models.images.update({ img_url: img_url }, {
                         raw: true,
@@ -298,7 +298,7 @@ class ProductServices {
                 }
 
                 if (images.img_3 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_3[0].filename
+                    const img_url = '/images/products_images/' + images.img_3[0].filename
 
                     await models.images.update({ img_url: img_url }, {
                         raw: true,
@@ -307,12 +307,14 @@ class ProductServices {
                 }
 
                 if (images.img_4 != undefined) {
-                    const img_url = '/images/products-images/' + images.img_4[0].filename
+                    const img_url = '/images/products_images/' + images.img_4[0].filename
 
-                    await models.images.update({ img_url: img_url }, {
+                    const msg = await models.images.update({ img_url: img_url }, {
                         raw: true,
                         where: { book_id: ID, img_order: 4 }
                     })
+
+                    console.log(msg)
                 }
 
                 resolve("Book is updated!")
@@ -350,14 +352,15 @@ class ProductServices {
                 // Create new book must be first because of Foreign-key
                 await models.books.create({
                     book_id: max_id + 1,
-                    title: (basicInfo.title || "New Title 2"), //value for not null attribute
-                    ISBN: (basicInfo.isbn || 555555), //value for not null attribute
+                    title: (basicInfo.title),
+                    ISBN: (basicInfo.isbn),
                     release_year: basicInfo.release_year,
-                    price: (basicInfo.sale_price || 50000),
+                    price: (basicInfo.sale_price),
                     publisher: basicInfo.publisher,
-                    number_of_pages: (basicInfo.page_num || null),
+                    number_of_pages: (basicInfo.page_num),
                     language: basicInfo.language,
-                    description: basicInfo.productDesc //not sure if can create
+                    description: basicInfo.productDesc,
+                    quantity_in_stock: basicInfo.quantity
                 }, { raw: true })
 
                 // Create author rows in authors table
@@ -384,41 +387,29 @@ class ProductServices {
                 }
 
                 // Create image_url rows in images table (fixed 4 of each book)
-                if (images.img_1 != undefined) {
-                    const img_url = '/images/products_images/' + images.img_1[0].filename
-                    await models.images.create({
-                        img_url: img_url,
-                        book_id: max_id + 1,
-                        img_order: 1
-                    }, { raw: true })
-                }
-                if (images.img_2 != undefined) {
-                    const img_url = '/images/products_images/' + images.img_2[0].filename
+                await models.images.create({
+                    img_url: '/images/products_images/' + images.img_1[0].filename,
+                    book_id: max_id + 1,
+                    img_order: 1
+                }, { raw: true })
 
-                    await models.images.create({
-                        book_id: max_id + 1,
-                        img_url: img_url,
-                        img_order: 2
-                    }, { raw: true })
-                }
-                if (images.img_3 != undefined) {
-                    const img_url = '/images/products_images/' + images.img_3[0].filename
+                await models.images.create({
+                    book_id: max_id + 1,
+                    img_url: '/images/products_images/' + images.img_2[0].filename,
+                    img_order: 2
+                }, { raw: true })
 
-                    await models.images.create({
-                        book_id: max_id + 1,
-                        img_url: img_url,
-                        img_order: 3
-                    }, { raw: true })
-                }
-                if (images.img_4 != undefined) {
-                    const img_url = '/images/products_images/' + images.img_4[0].filename
+                await models.images.create({
+                    book_id: max_id + 1,
+                    img_url: '/images/products_images/' + images.img_3[0].filename,
+                    img_order: 3
+                }, { raw: true })
 
-                    await models.images.create({
-                        book_id: max_id + 1,
-                        img_url: img_url,
-                        img_order: 4
-                    }, { raw: true })
-                }
+                await models.images.create({
+                    book_id: max_id + 1,
+                    img_url: '/images/products_images/' + images.img_4[0].filename,
+                    img_order: 4
+                }, { raw: true })
 
                 resolve("Book is create!")
             }
