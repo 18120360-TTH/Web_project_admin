@@ -2,8 +2,9 @@ const { models } = require('../../config/db')
 const sequelize = require('sequelize')
 
 class ProductServices {
-    getAllBooks = (page) => {
-        return new Promise(async (resolve, reject) => {
+    //getAllBooks = (page) => {
+        //return new Promise(async (resolve, reject) => {
+    getAllBooks(page){
             try {
                 const offset = (page - 1) * 6
                 const result = await models.books.findAndCountAll({
@@ -17,18 +18,19 @@ class ProductServices {
                 const books = result.rows
                 const count = result.count
                 
-                //return({books,count})
-                resolve({ books, count })
+                return({books,count})
+                //resolve({ books, count })
             }
             catch (err) {
-                reject(err)
-                //console.log(err)
+                //reject(err)
+                console.log(err)
             }
-        })
+        //})
     }
 
-    getSearchedBooks = (keyword, page) => {
-        return new Promise(async (resolve, reject) => {
+    //getSearchedBooks = (keyword, page) => {
+    getSearchedBooks(keyword, page){
+      //  return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
                 const result = await models.books.findAndCountAll({
@@ -45,10 +47,14 @@ class ProductServices {
                 const searchedBooks = result.rows
                 const count = result.count
 
-                resolve({ searchedBooks, count })
+                //resolve({ searchedBooks, count })
+                return({ searchedBooks, count })
             }
-            catch (err) { reject(err) }
-        })
+            catch (err) { 
+                //reject(err) 
+                console.log(err)
+            }
+        //})
     }
 
     getImagesByBook = (ID) => {
@@ -138,8 +144,9 @@ class ProductServices {
         })
     }
 
-    getBooksByCategory = (category, page) => {
-        return new Promise(async (resolve, reject) => {
+    //getBooksByCategory = (category, page) => {
+    getBooksByCategory(category, page){
+        //return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
                 const result = await models.books.findAndCountAll({
@@ -159,16 +166,19 @@ class ProductServices {
                 const categorizedBooks = result.rows
                 const count = result.count
 
-                resolve({ categorizedBooks, count })
+                //resolve({ categorizedBooks, count })
+                return({ categorizedBooks, count })
             }
             catch (err) {
-                reject(err)
+                //reject(err)
+                console.log(err)
             }
-        })
+        //})
     }
 
-    getFilteredBook = (query, page) => {
-        return new Promise(async (resolve, reject) => {
+    //getFilteredBook = (query, page) => {
+    getFilteredBook(query, page){
+        //return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
 
@@ -203,12 +213,14 @@ class ProductServices {
                 const filteredBooks = result.rows
                 const count = result.count
 
-                resolve({ filteredBooks, count })
+                //resolve({ filteredBooks, count })
+                return({ filteredBooks, count })
             }
             catch (err) {
-                reject(err)
+                //reject(err)
+                console.log(err)
             }
-        })
+        //})
     }
 
     softDeleteBookByID = (ID) => {
