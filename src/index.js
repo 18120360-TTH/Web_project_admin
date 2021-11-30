@@ -13,7 +13,8 @@ sequelize.authenticate()
     // const methodOverride = require('method-override')
 
     const app = express()
-    const port = 3000
+    //const port = 3000
+    const PORT = process.env.PORT || 3000; //PORT to deploy in heroku
 
 
     const route = require('./routes')
@@ -50,9 +51,14 @@ sequelize.authenticate()
     // Routing
     route(app)
 
-    app.listen(port, () => {
-      console.log(`Example app listening at http://localhost:${port}`)
-    })
+    //app.listen(port, () => {
+    //  console.log(`Example app listening at http://localhost:${port}`)
+    //})
+  
+    app.listen(PORT, () => {
+      console.log(`Our app is running on port ${ PORT }`);
+    });
+
   })
   .catch(error => {
     console.error('Unable to connect to the database:', error);
