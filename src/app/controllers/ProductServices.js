@@ -29,7 +29,7 @@ class ProductServices {
     }
 
     //getSearchedBooks = (keyword, page) => {
-    getSearchedBooks(keyword, page){
+    async getSearchedBooks(keyword, page){
       //  return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
@@ -145,7 +145,7 @@ class ProductServices {
     }
 
     //getBooksByCategory = (category, page) => {
-    getBooksByCategory(category, page){
+    async getBooksByCategory(category, page){
         //return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
@@ -177,7 +177,7 @@ class ProductServices {
     }
 
     //getFilteredBook = (query, page) => {
-    getFilteredBook(query, page){
+    async getFilteredBook(query, page){
         //return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
