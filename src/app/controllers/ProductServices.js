@@ -16,16 +16,18 @@ class ProductServices {
                 })
                 const books = result.rows
                 const count = result.count
-
+                
+                //return({books,count})
                 resolve({ books, count })
             }
             catch (err) {
                 reject(err)
+                //console.log(err)
             }
         })
     }
 
-    getSearchedBooks(keyword, page) {
+    getSearchedBooks = (keyword, page) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const offset = (page - 1) * 6
