@@ -4,7 +4,7 @@ const sequelize = require('sequelize')
 class ProductServices {
     //getAllBooks = (page) => {
         //return new Promise(async (resolve, reject) => {
-    getAllBooks(page){
+    async getAllBooks(page){
             try {
                 const offset = (page - 1) * 6
                 const result = await models.books.findAndCountAll({
