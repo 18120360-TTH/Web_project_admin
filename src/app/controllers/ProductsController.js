@@ -185,6 +185,7 @@ class ProductsController {
             // Use for filter
             authorsList,
             publishersList,
+            categoryStatus: req.query.category,
             // Use for pagination
             path,
             page,
@@ -253,6 +254,7 @@ class ProductsController {
             // Use for filter
             authorsList,
             publishersList,
+            filterStatus: req.query,
             // Use for pagination
             path,
             page,

@@ -120,7 +120,8 @@
                                                                         class="text-danger">*</span></label>
                                                                 <input id="quantity" name="quantity" type="text"
                                                                     class="form-control"
-                                                                    value="{{bookByID.quantity_in_stock}}" required>
+                                                                    value="{{bookByID.quantity_in_stock}}" min="10"
+                                                                    max="100" required>
                                                             </div>
                                                         </div>
                                                     </div>
