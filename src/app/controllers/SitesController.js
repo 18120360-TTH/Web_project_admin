@@ -1,4 +1,6 @@
 
+const authServices = require('./AuthServices')
+
 class SitesController {
 
     // [GET] /index
@@ -6,9 +8,10 @@ class SitesController {
         res.render('sites/index')
     }
 
-    // [GET] /index
-    admin(req, res) {
-        res.render('sites/admin-profile')
+    // [GET] /admin-profile
+    async admin(req, res) {
+        const userInfo = await authServices.findUser(req.user.username)
+        res.render('sites/admin-profile', { userInfo })
     }
 }
 
