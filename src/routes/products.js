@@ -1,34 +1,19 @@
 const express = require('express')
-const ProductsController = require('../app/controllers/ProductsController')
-// const multer = require('multer')
-// const path = require('path')
+const productsController = require('../app/controllers/ProductsController')
+const authController = require('../app/controllers/AuthController')
 
 const router = express.Router()
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, callback) {
-//         callback(null, path.join(__dirname, '../public/images/products_images'))
-//     },
-//     filename: function (req, file, callback) {
-//         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-//     }
-// })
+router.use('/product-list', productsController.productList)
+router.use('/products-searched', productsController.productSearch)
+router.use('/product-categorized', productsController.productCategory)
+router.use('/product-filtered', productsController.productFilter)
 
-// const upload = multer({ storage: storage })
-//.array('image_1', 4)
+router.use('/product-edit', productsController.productEditView)
+router.use('/add-product', productsController.addProduct)
+router.post('/delete/:id', productsController.softDeleteProduct)
 
-router.use('/product-list', ProductsController.productList)
-router.use('/products-searched', ProductsController.productSearch)
-router.use('/product-categorized', ProductsController.productCategory)
-router.use('/product-filtered', ProductsController.productFilter)
-
-router.use('/product-edit', ProductsController.productEditView)
-router.use('/add-product', ProductsController.addProduct)
-router.post('/delete/:id', ProductsController.softDeleteProduct)
-
-router.post('/products-edit/:id', ProductsController.productEdit)
-router.post('/products-add/new-product', ProductsController.newProductAdd)
-
-//router.put('/product-edit/:id', ProductsController.editProduct)
+router.post('/products-edit/:id', productsController.productEdit)
+router.post('/products-add/new-product', productsController.newProductAdd)
 
 module.exports = router

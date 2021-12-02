@@ -46,6 +46,9 @@ class ProductsController {
         const authorsList = await productServices.getAllAuthors()
         const publishersList = await productServices.getAllPublishers()
 
+        // console.log("passport.deserializeUser----------------------")
+        // console.log(req)
+
         res.render('products/product-list', {
             books,
             // Use for filter

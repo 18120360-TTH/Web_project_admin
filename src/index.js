@@ -10,7 +10,8 @@ sequelize.authenticate()
     const handlebars = require('express-handlebars');
     const path = require('path')
     const morgan = require('morgan')
-    // const methodOverride = require('method-override')
+    const passport = require('passport')
+    const session = require('express-session')
 
     const app = express()
     const port = 3000
@@ -24,12 +25,19 @@ sequelize.authenticate()
     // HTTP loggers
     app.use(morgan('combined'))
 
-    //Method Override
-    //app.use(methodOverride('_method'))
-
     //Middleware to get <form> data
     app.use(express.urlencoded({ extended: true }))
     app.use(express.json())
+
+    // Authenticate initialize
+    app.use(session({
+      secret: 'my_secret',
+      // resave: false,
+      // saveUninitialized: true,
+      // cookie: { secure: true }
+    }))
+    app.use(passport.initialize())
+    app.use(passport.session())
 
     // Template engine
     app.engine('hbs', handlebars({
