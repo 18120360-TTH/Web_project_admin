@@ -4,7 +4,6 @@ const passport = require('passport')
 const authController = require('../app/controllers/AuthController')
 const initPassportLocal = require('../app/controllers/auth/PassportLocal')
 
-
 initPassportLocal()
 
 router.get('/login', authController.loginView)

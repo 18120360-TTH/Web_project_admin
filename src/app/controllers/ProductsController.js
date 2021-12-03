@@ -14,9 +14,7 @@ class ProductsController {
             page = req.query.page
         }
 
-        const result = await productServices.getAllBooks(page)
-        const books = result.books
-        const count = result.count
+        const { books, count } = await productServices.getAllBooks(page)
 
         // Calculate number of resulted pages
         const totalPage = Math.ceil(count / 6)
@@ -45,9 +43,6 @@ class ProductsController {
         // Use for filter
         const authorsList = await productServices.getAllAuthors()
         const publishersList = await productServices.getAllPublishers()
-
-        // console.log("passport.deserializeUser----------------------")
-        // console.log(req)
 
         res.render('products/product-list', {
             books,
@@ -79,9 +74,7 @@ class ProductsController {
             page = req.query.page
         }
 
-        const result = await productServices.getSearchedBooks(req.query.search, page)
-        const searchedBooks = result.searchedBooks
-        const count = result.count
+        const { searchedBooks, count } = await productServices.getSearchedBooks(req.query.search, page)
 
         // Calculate number of resulted pages
         const totalPage = Math.ceil(count / 6)
@@ -110,16 +103,11 @@ class ProductsController {
         const authorsList = await productServices.getAllAuthors()
         const publishersList = await productServices.getAllPublishers()
 
-        let path = "/products-list/product-filtered?"
-        for (let i in req.query) {
-            if (i != 'page') {
-                path += i + "=" + req.query[i] + "&"
-            }
-        }
-        path += "page="
-
         res.render('products/product-list', {
             books: searchedBooks,
+            // Use for filter
+            publishersList,
+            authorsList,
             // Use for pagination
             path: "/products/products-searched?page=",
             page,
