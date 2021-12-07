@@ -12,7 +12,7 @@ function route(app) {
     app.use('/auth', authRouter)
 
     // Check if user is authenticated or not
-    //app.use(authController.authenCheck)
+    app.use(authController.authenCheck)
 
     // Allow user access all pages
     app.use('/products', productsRouter)
