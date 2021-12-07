@@ -1,0 +1,190 @@
+<body data-sidebar="dark">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0">Admins</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Admins</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-8">
+                                                <div class="form-inline float-md-right mr-2">
+                                                    <a href="/admin/add-account" class="btn btn-primary mb-2"><i
+                                                            class="mdi mdi-plus mr-2"></i> Add Admin Account</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row table-responsive mt-3">
+                                            <table class="table table-centered datatable dt-responsive nowrap "
+                                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead class="thead-light">
+                                                    <tr class="text-center">
+                                                        <th>Admin</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Status</th>
+                                                        <th style="width: 120px;">Action</th>
+                                                    </tr>
+                                                </thead>                                            
+                                                <tbody class="text-center">
+                                                    {{#each admins}}                                                    
+                                                    <tr>
+                                                        <td><a href="/admin/admin-profile?username={{username}}"
+                                                        class="text-primary">{{username}}</a></td>
+                                                        <td>{{email}}</td>
+                                                        <td>{{phone_number}}</td>
+
+                                                        <td>
+                                                            {{#if active}}
+                                                            <div class="badge badge-soft-success font-size-14">Active</div>
+                                                            {{else}}
+                                                            <div class="badge badge-soft-danger font-size-14">Blocked</div>
+                                                            {{/if}}
+                                                        </td>
+                                                        <td>
+                                                            <a class="text-center text-warning" href="" data-toggle="modal"
+                                                                data-target="#blockConfirm" data-placement="top" title=""
+                                                                data-original-title="Edit"><i
+                                                                    class="mdi mdi-lock-question mdi-18px"></i></a>
+                                                        </td>
+                                                    </tr>                                                    
+                                                    {{/each}}
+                                                </tbody>                        
+                                            </table>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-sm-12">
+                                                <p class="mb-sm-0 mt-2">Page <span
+                                                        class="font-weight-bold">{{page}}</span>
+                                                    of <span class="font-weight-bold">{{lastPage}}</span></p>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="float-sm-right">
+                                                    <ul class="pagination pagination-rounded mb-sm-0">
+                                                        {{#if isPreValid}}
+                                                        <li class="page-item">
+                                                            <a href="{{path}}1" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-left"></i></a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-left"></i></a>
+                                                        </li>
+                                                        {{else}}
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}1" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-left"></i></a>
+                                                        </li>
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-left"></i></a>
+                                                        </li>
+                                                        {{/if}}
+
+                                                        <li class="page-item active">
+                                                            <a href="#" class="page-link">{{page}}</a>
+                                                        </li>
+
+                                                        {{#if isNextValid}}
+                                                        <li class="page-item">
+                                                            <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-right"></i></a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                                        </li>
+                                                        {{else}}
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-right"></i></a>
+                                                        </li>
+                                                        <li class="page-item disabled">
+                                                            <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                                        </li>
+                                                        {{/if}}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Nazox.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+</body>
+
+<div class="modal fade" id="blockConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirm block (unblock)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Block or unblock this account ?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-block-user" type="button" class="btn btn-danger">Block</button>
+                <button id="btn-unblock-user" type="button" class="btn btn-success">Unblock</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

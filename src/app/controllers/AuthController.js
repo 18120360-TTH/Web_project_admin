@@ -1,5 +1,3 @@
-const authServices = require('./AuthServices')
-
 class AuthController {
     // [GET]  /login
     loginView(req, res) {
@@ -35,6 +33,7 @@ class AuthController {
             next();
         }
     }
+
 }
 
 module.exports = new AuthController

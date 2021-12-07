@@ -5,7 +5,7 @@ class CustomerController {
     //[GET] /customer-list
     async customerList(req, res) {
         const { customers, count } = await customerServices.getAllCustomers(1)
-        console.log(customers)
+        //console.log(customers)
         res.render('customers/customers-list', { customers })
     }
 
