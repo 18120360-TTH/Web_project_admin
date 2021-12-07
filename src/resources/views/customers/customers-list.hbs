@@ -35,15 +35,7 @@
                                         <table class="table table-centered datatable dt-responsive nowrap "
                                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead class="thead-light">
-                                                <tr>
-                                                    <th style="width: 20px;">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck">&nbsp;</label>
-                                                        </div>
-                                                    </th>
+                                                <tr class="text-center">
                                                     <th>Customer</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
@@ -52,332 +44,29 @@
                                                     <th style="width: 120px;">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="text-center">
+                                                {{#each customers}}
                                                 <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck1">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck1">&nbsp;</label>
-                                                        </div>
-                                                    </td>
+                                                    <td><a href="/customer/customer-detail">{{full_name}}</a></td>
+                                                    <td>{{email}}</td>
+                                                    <td>{{phone_number}}</td>
 
-                                                    <td><a href="/customer/customer-detail">Carolyn Harvey</a></td>
-                                                    <td>CarolynHarvey@rhyta.com</td>
-                                                    <td>580-464-4694</td>
-
+                                                    <td> $ 3245 </td>
                                                     <td>
-                                                        $ 3245
-                                                    </td>
-                                                    <td>
+                                                        {{#if active}}
                                                         <div class="badge badge-soft-success font-size-14">Active</div>
+                                                        {{else}}
+                                                        <div class="badge badge-soft-danger font-size-14">Blocked</div>
+                                                        {{/if}}
                                                     </td>
                                                     <td>
-                                                        <a href="" class="mr-3 text-primary" data-toggle="modal"
+                                                        <a class="text-center text-warning" href="" data-toggle="modal"
                                                             data-target="#blockConfirm" data-placement="top" title=""
                                                             data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
+                                                                class="mdi mdi-lock-question mdi-18px"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck2">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck2">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Angelyn Hardin</a></td>
-                                                    <td>AngelynHardin@dayrep.com</td>
-                                                    <td>913-248-2690</td>
-
-                                                    <td>
-                                                        $ 2435
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck3">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck3">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Carrie Thompson</a></td>
-                                                    <td>CarrieThompson@rhyta.com</td>
-                                                    <td>734-819-9286</td>
-
-                                                    <td>
-                                                        $ 2653
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-danger font-size-14">Blocked</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck4">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck4">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Kathleen Haller</a></td>
-                                                    <td>KathleenHaller@dayrep.com</td>
-                                                    <td>313-742-3333</td>
-
-                                                    <td>
-                                                        $ 2135
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-danger font-size-14">Blocked</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck5">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck5">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Martha Beasley</a></td>
-                                                    <td>MarthaBeasley@teleworm.us</td>
-                                                    <td>301-330-5745</td>
-
-                                                    <td>
-                                                        $ 2698
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck6">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck6">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Kathryn Hudson</a></td>
-                                                    <td>KathrynHudson@armyspy.com</td>
-                                                    <td>414-453-5725</td>
-
-                                                    <td>
-                                                        $ 2758
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck7">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck7">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Robert Bott</a></td>
-                                                    <td>RobertBott@armyspy.com</td>
-                                                    <td>712-237-9899</td>
-
-                                                    <td>
-                                                        $ 2836
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck8">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck8">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Mary McDonald</a></td>
-                                                    <td>MaryMcDonald@armyspy.com</td>
-                                                    <td>317-510-25554</td>
-
-                                                    <td>
-                                                        $ 3245
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck9">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck9">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Keith Rainey</a></td>
-                                                    <td>KeithRainey@jourrapide.com</td>
-                                                    <td>214-712-1810</td>
-
-                                                    <td>
-                                                        $ 3125
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-danger font-size-14">Blocked</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck10">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck10">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Anthony Russo</a></td>
-                                                    <td>AnthonyRusso@jourrapide.com</td>
-                                                    <td>412-371-8864</td>
-
-                                                    <td>
-                                                        $ 2456
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck11">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck11">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Donna Betz</a></td>
-                                                    <td>DonnaBetz@jourrapide.com</td>
-                                                    <td>626-583-5779</td>
-
-                                                    <td>
-                                                        $ 3423
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customercheck12">
-                                                            <label class="custom-control-label"
-                                                                for="customercheck12">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="/customer/customer-detail">Angie Andres</a></td>
-                                                    <td>AngieAndres@armyspy.com</td>
-                                                    <td>213-494-4527</td>
-
-                                                    <td>
-                                                        $ 3245
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-14">Active</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-
+                                                {{/each}}
                                             </tbody>
                                         </table>
                                     </div>

@@ -120,7 +120,8 @@
                                                                         class="text-danger">*</span></label>
                                                                 <input id="quantity" name="quantity" type="text"
                                                                     class="form-control"
-                                                                    value="{{bookByID.quantity_in_stock}}" required>
+                                                                    value="{{bookByID.quantity_in_stock}}" min="10"
+                                                                    max="100" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -200,7 +201,7 @@
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center">
                                                             <span>
-                                                                <a>
+                                                                <a href="{{bookByID.img_1}}">
                                                                     <div class="product-color-item ">
                                                                         <img id="img_01" src="{{bookByID.img_1}}"
                                                                             width="200px" alt="">
@@ -219,9 +220,9 @@
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center">
                                                             <span>
-                                                                <a>
-                                                                    <div class="product-color-item ">
-                                                                        <img id="img_02" src="{{bookByID.img_2}}"
+                                                                <a href="{{bookByID.img_2}}">
+                                                                    <div class=" product-color-item ">
+                                                                        <img id=" img_02" src="{{bookByID.img_2}}"
                                                                             width="200px" alt="">
                                                                     </div>
                                                                 </a>
@@ -238,7 +239,7 @@
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center">
                                                             <span>
-                                                                <a>
+                                                                <a href="{{bookByID.img_3}}">
                                                                     <div class="product-color-item ">
                                                                         <img id="img_03" src="{{bookByID.img_3}}"
                                                                             width="200px" alt="">
@@ -257,7 +258,7 @@
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center">
                                                             <span>
-                                                                <a>
+                                                                <a href="{{bookByID.img_4}}">
                                                                     <div class="product-color-item ">
                                                                         <img id="img_04" src="{{bookByID.img_4}}"
                                                                             width="200px" alt="">

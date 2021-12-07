@@ -1,10 +1,15 @@
+const customerServices = require('./CustomerServices')
+
 class CustomerController {
 
     //[GET] /customer-list
-    customerList(req, res) {
-        res.render('customers/customers-list')
+    async customerList(req, res) {
+        const { customers, count } = await customerServices.getAllCustomers(1)
+        //console.log(customers)
+        res.render('customers/customers-list', { customers })
     }
 
+    //[GET] /customer-detail
     customerDetail(req, res) {
         res.render('customers/customers-detail')
     }

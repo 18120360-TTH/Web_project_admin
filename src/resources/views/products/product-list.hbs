@@ -28,13 +28,14 @@
                     <!-- end page title -->
 
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4">
+                        <div class="col-xl-3 col-lg-4 col-md-3">
                             <div class="card">
                                 <div class="card-header bg-transparent border-bottom">
                                     <h5 class="mt-2 mb-2 font-size-16">CATEGORIES</h5>
                                     <form method="GET" action="/products/product-categorized">
                                         <select class="form-control" name="category" id="category"
                                             onchange="this.form.submit()">
+                                            {{#select categoryStatus}}
                                             <option value="all">All</option>
                                             <option value="English learning">English learning</option>
                                             <option value="Self-help">Self-help</option>
@@ -43,6 +44,7 @@
                                             <option value="Long story">Long story</option>
                                             <option value="Information Technology">Information Technology</option>
                                             <option value="Manga">Manga</option>
+                                            {{/select}}
                                         </select>
                                     </form>
                                 </div>
@@ -54,12 +56,21 @@
                                             <div>
                                                 <h5 class="font-size-14 mb-2">Price range <span>(x1000 VNĐ)</span></h5>
                                                 <div class="d-flex justify-content-between">
+                                                    {{#if filterStatus}}
+                                                    <input class="col-5 form-control" type="number" id="min_price"
+                                                        name="min_price" placeholder="Min price..." min="0" max="1000"
+                                                        value="{{filterStatus.min_price}}">
+                                                    <input class="col-5 form-control" type="number" id="max_price"
+                                                        name="max_price" placeholder="Max price..." min="0" max="1000"
+                                                        value="{{filterStatus.max_price}}">
+                                                    {{else}}
                                                     <input class="col-5 form-control" type="number" id="min_price"
                                                         name="min_price" placeholder="Min price..." min="0" max="1000"
                                                         value="0">
                                                     <input class="col-5 form-control" type="number" id="max_price"
                                                         name="max_price" placeholder="Max price..." min="0" max="1000"
                                                         value="1000">
+                                                    {{/if}}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,10 +80,12 @@
                                                 <div>
                                                     <h5 class="font-size-14 mb-2">Authors </h5>
                                                     <select class="form-control" name="author" id="author">
+                                                        {{#select filterStatus.author}}
                                                         <option value="all">All</option>
                                                         {{#each authorsList}}
                                                         <option value="{{author}}">{{author}}</option>
                                                         {{/each}}
+                                                        {{/select}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -81,10 +94,12 @@
                                                 <div>
                                                     <h5 class="font-size-14 mb-2">Publishers </h5>
                                                     <select class="form-control" name="publisher" id="publisher">
+                                                        {{#select filterStatus.publisher}}
                                                         <option value="all">All</option>
                                                         {{#each publishersList}}
                                                         <option value="{{publisher}}">{{publisher}}</option>
                                                         {{/each}}
+                                                        {{/select}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -93,9 +108,11 @@
                                                 <div>
                                                     <h5 class="font-size-14 mb-2">Languages </h5>
                                                     <select class="form-control" name="language" id="language">
+                                                        {{#select filterStatus.language}}
                                                         <option value="all">All</option>
                                                         <option value="English">English</option>
                                                         <option value="Vietnamese">Vietnamese</option>
+                                                        {{/select}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -108,12 +125,12 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-xl-9 col-lg-8 col-md-9">
                             <div class="card">
                                 <div class="card-body">
                                     <div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div>
                                                     <h5>Books</h5>
                                                     <p>Show {{firstIndex}} - {{lastIndex}} of {{count}} results
@@ -121,9 +138,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <div class="form-inline float-md-right">
-                                                    <!-- <div class="search-box ml-2"> -->
                                                     <form method="GET" action="/products/products-searched">
                                                         <input type="text" class="form-control rounded" name="search"
                                                             placeholder="Search...">
@@ -131,7 +147,6 @@
                                                             <i class="mdi mdi-magnify"></i>
                                                         </button>
                                                     </form>
-                                                    <!-- </div> -->
                                                 </div>
                                                 <div class="form-inline float-md-right mr-2">
                                                     <a href="/products/add-product" class="btn btn-primary mb-2"><i
@@ -141,22 +156,13 @@
 
                                         </div>
 
-                                        <ul class="list-inline my-3 ecommerce-sortby-list">
-                                            <li class="list-inline-item"><span
-                                                    class="font-weight-medium font-family-secondary">Sort by:</span>
-                                            </li>
-                                            <li class="list-inline-item active"><a href="#">Popularity</a></li>
-                                            <li class="list-inline-item"><a href="#">Newest</a></li>
-                                            <li class="list-inline-item"><a href="#">Discount</a></li>
-                                        </ul>
-
-                                        <div class="row no-gutters">
+                                        <div class="row col-12 no-gutters d-flex flex-wrap">
                                             {{#each books}}
-                                            <div class="col-xl-4 col-sm-6">
+                                            <div class="col-xl-4 col-lg-6 col-md-6">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        <div class="product-ribbon badge badge-primary">
-                                                            -25%
+                                                        <div class="product-ribbon badge badge-info">
+                                                            -20%
                                                         </div>
                                                         <div class="product-like">
                                                             <a href="#"
@@ -190,14 +196,12 @@
                                         </div>
 
                                         <div class="row mt-4">
-                                            <div class="col-sm-6">
-                                                <div>
-                                                    <p class="mb-sm-0 mt-2">Page <span
-                                                            class="font-weight-bold">{{page}}</span>
-                                                        of <span class="font-weight-bold">{{lastPage}}</span></p>
-                                                </div>
+                                            <div class="col-sm-12">
+                                                <p class="mb-sm-0 mt-2">Page <span
+                                                        class="font-weight-bold">{{page}}</span>
+                                                    of <span class="font-weight-bold">{{lastPage}}</span></p>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <div class="float-sm-right">
                                                     <ul class="pagination pagination-rounded mb-sm-0">
                                                         {{#if isPreValid}}

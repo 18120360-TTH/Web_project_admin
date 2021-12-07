@@ -13,7 +13,7 @@
                                     <div>
                                         <div class="text-center">
                                             <div>
-                                                <a href="/" class="logo"><img src="/images/logo-dark.png" height="20"
+                                                <a href="/" class="logo"><img src="/images/logo-dark.png" height="45"
                                                         alt="logo"></a>
                                             </div>
 
@@ -22,20 +22,29 @@
                                         </div>
 
                                         <div class="p-2 mt-5">
-                                            <form class="form-horizontal" action="/">
-
+                                            <form class="form-horizontal" method="POST" action="/auth/login">
+                                                {{#if msg}}
+                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                    role="alert">
+                                                    {{msg}}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {{/if}}
                                                 <div class="form-group auth-form-group-custom mb-4">
                                                     <i class="ri-user-2-line auti-custom-input-icon"></i>
                                                     <label for="username">Username</label>
                                                     <input type="text" class="form-control" id="username"
-                                                        placeholder="Enter username">
+                                                        placeholder="Enter username" name="username">
                                                 </div>
 
                                                 <div class="form-group auth-form-group-custom mb-4">
                                                     <i class="ri-lock-2-line auti-custom-input-icon"></i>
                                                     <label for="userpassword">Password</label>
                                                     <input type="password" class="form-control" id="userpassword"
-                                                        placeholder="Enter password">
+                                                        placeholder="Enter password" name="password">
                                                 </div>
 
                                                 <div class="custom-control custom-checkbox">
@@ -49,17 +58,10 @@
                                                     <button class="btn btn-primary w-md waves-effect waves-light"
                                                         type="submit">Log In</button>
                                                 </div>
-
-                                                {{!-- <div class="mt-4 text-center">
-                                                    <a href="auth-recoverpw.html" class="text-muted"><i
-                                                            class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
-                                                </div> --}}
                                             </form>
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            {{!-- <p>Don't have an account ? <a href="auth-register.html"
-                                                    class="font-weight-medium text-primary"> Register </a> </p> --}}
                                             <p>© 2020 Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i> by
                                                 Themesdesign</p>
                                         </div>
@@ -72,7 +74,8 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="authentication-bg">
-                        <div class="bg-overlay"></div>
+                        <div class="bg-overlay">
+                        </div>
                     </div>
                 </div>
             </div>

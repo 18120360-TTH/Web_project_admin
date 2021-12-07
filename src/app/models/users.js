@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('users', {
     username: {
       type: DataTypes.STRING(255),
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     role: {
-      type: DataTypes.ENUM('Customer','Admin'),
+      type: DataTypes.ENUM('Customer', 'Admin'),
       allowNull: true,
       defaultValue: "Customer"
     },
