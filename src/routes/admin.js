@@ -4,8 +4,8 @@ const AdminController = require('../app/controllers/AdminController')
 
 router.get('/admins-list', AdminController.adminsList)
 router.get('/add-account', AdminController.addAdminPage)
-router.use('/admin-profile', AdminController.adminProfile)
+router.get('/admin-profile', AdminController.adminProfile)
 
-router.post('/add-account/new-admin', AdminController.addNewAdmin)
+router.post('/add-account', AdminController.addNewAdmin)
 
 module.exports = router

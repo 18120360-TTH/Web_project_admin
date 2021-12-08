@@ -8,7 +8,7 @@ class SitesServices {
             try {
 
                 await models.users.create({
-                    username:AccountInfo.username,
+                    username: AccountInfo.username,
                     password_hashed: bcrypt.hashSync(AccountInfo.password, 10),
                     full_name: (AccountInfo.firstname + " " + AccountInfo.lastname),
                     email: AccountInfo.email,
@@ -27,14 +27,14 @@ class SitesServices {
         })
     }
 
-    getAllAdmins = (page) => {
+    getAllAdmins = (page, limit) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const offset = (page - 1) * 6
+                const offset = (page - 1) * limit
                 const result = await models.users.findAndCountAll({
                     raw: true,
                     offset: offset,
-                    limit: 6,
+                    limit: limit,
                     where: {
                         role: "Admin"
                     }
@@ -50,7 +50,7 @@ class SitesServices {
         })
     }
 
-    findUser = (username) => {
+    findAdmin = (username) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const result = await models.users.findOne({
