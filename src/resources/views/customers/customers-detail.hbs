@@ -21,19 +21,14 @@
                                         <a href="#">{{customer.email}}</a>
                                         <p>{{customer.phone_number}}</p>
                                     </div>
-                                    <ul class="list-group list-group-flush">
+                                    <ul class="list-group list-group-flush text-center">
                                         <li class="list-group-item">
                                             <h6 class="font-size-14">Last order</h6>
-
-                                            <span><a href="#">#80294</a> - 7 days ago</span>
+                                            <span class="text-primary">#{{customer.lastOrder.ID}}</span>
                                         </li>
                                         <li class="list-group-item">
-                                            <h6 class="font-size-14">Average Order Value</h6>
-                                            <span>$574.00</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <h6 class="font-size-14">Register time</h6>
-                                            <span>2 months ago</span>
+                                            <h6 class="font-size-14">Average Spent</h6>
+                                            <span>{{customer.averageSpent}}đ</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -43,31 +38,79 @@
                                 <div class="row card">
                                     <div class="d-flex justify-content-between mt-4 ml-4 mr-4">
                                         <h5>Recently orders</h5>
-                                        <p> Total spent $34,980.34 on 7 orders</p>
+                                        <p> Total spent {{totalSpent}}đ on {{totalOder}} orders</p>
                                     </div>
                                     <div class="table-responsive p-4">
-                                        <table class="table table-striped mb-0">
+                                        <table class="table table-striped mb-0 text-center">
+                                            <thead class="thead-dark">
+                                                <th>Order ID</th>
+                                                <th>Order date</th>
+                                                <th>Status</th>
+                                                <th>Final cost</th>
+                                            </thead>
                                             <tbody>
+                                                {{#each orders}}
                                                 <tr>
-                                                    <th scope="row"><a href="">#80294</a></th>
-                                                    <td>Today at 6:10 pm</td>
-                                                    <td>Pending</td>
-                                                    <td>$320.00</td>
+                                                    <th scope="row"><a
+                                                            href="/orders/orders-detail?order_id={{order_id}}">#{{order_id}}</a>
+                                                    </th>
+                                                    <td style="max-width:270px;">{{order_date}}</td>
+                                                    <td>
+                                                        <div class="badge badge-soft-warning font-size-12">
+                                                            {{delivery_status}}</div>
+                                                    </td>
+                                                    <td>{{final_cost}}đ</td>
                                                 </tr>
-                                                <tr>
-                                                    <th scope="row"><a href="">#63736</a></th>
-                                                    <td>May 15, 2019</td>
-                                                    <td>Completed</td>
-                                                    <td>$2,574.31</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><a href="">#63501</a></th>
-                                                    <td>January 7, 2019</td>
-                                                    <td>Delivery</td>
-                                                    <td>$34.00</td>
-                                                </tr>
+                                                {{/each}}
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="row d-flex justify-content-center pb-3">
+                                        <ul class="pagination pagination-rounded mb-sm-0">
+                                            {{#if isPreValid}}
+                                            <li class="page-item">
+                                                <a href="{{path}}1" class="page-link"><i
+                                                        class="mdi mdi-chevron-double-left"></i></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-left"></i></a>
+                                            </li>
+                                            {{else}}
+                                            <li class="page-item disabled">
+                                                <a href="{{path}}1" class="page-link"><i
+                                                        class="mdi mdi-chevron-double-left"></i></a>
+                                            </li>
+                                            <li class="page-item disabled">
+                                                <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-left"></i></a>
+                                            </li>
+                                            {{/if}}
+
+                                            <li class="page-item active">
+                                                <a href="#" class="page-link">{{page}}</a>
+                                            </li>
+
+                                            {{#if isNextValid}}
+                                            <li class="page-item">
+                                                <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-right"></i></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-double-right"></i></a>
+                                            </li>
+                                            {{else}}
+                                            <li class="page-item disabled">
+                                                <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-right"></i></a>
+                                            </li>
+                                            <li class="page-item disabled">
+                                                <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                        class="mdi mdi-chevron-double-right"></i></a>
+                                            </li>
+                                            {{/if}}
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="row card">
@@ -76,15 +119,12 @@
                                     </div>
                                     <div class="ml-4 mr-4">
                                         <ul class="list-group list-group-flush">
+                                            {{#with customer.recentAddress}}
                                             <li class="list-group-item">
-                                                <h6 class="font-size-14">Jessica Moore</h6>
-
-                                                <span>Random Federation 115302, Moscow ul. Varshavskaya, 15-2-178</span>
+                                                <h6 class="font-size-14">{{name}}</h6>
+                                                <span>{{address}}</span>
                                             </li>
-                                            <li class="list-group-item">
-                                                <h6 class="font-size-14">Neptune Saturnov </h6>
-                                                <span>Earth 4b4f53, MarsGrad Sun Orbit, 43.3241-85.239</span>
-                                            </li>
+                                            {{/with}}
                                         </ul>
                                     </div>
                                 </div>

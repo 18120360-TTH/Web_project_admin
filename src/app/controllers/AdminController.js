@@ -1,4 +1,6 @@
 const adminServices = require('./AdminServices')
+const multer = require('multer')
+const path = require('path')
 
 class AdminController {
     // [GET] /admin-profile
@@ -57,6 +59,28 @@ class AdminController {
     async addNewAdmin(req, res) {
         const isAdded = await adminServices.addNewAdmin(req.body)
         res.redirect('/admin/admins-list')
+    }
+
+    // [POST] /admin-profile?update=profile
+    async updateProfile(req, res) {
+        const storage = multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, path.join(__dirname, '../../public/images/users'))
+            },
+            filename: function (req, file, callback) {
+                callback(null, req.user.username + '_' + Date.now() + path.extname(file.originalname))
+            }
+        })
+
+        const upload = multer({ storage: storage }).single('avatar')
+
+        upload(req, res, async function (err) {
+            await adminServices.updateProfile(req.user.username, req.body, req.file)
+        })
+
+
+
+        res.redirect('/admin/admin-profile')
     }
 }
 

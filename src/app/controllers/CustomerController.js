@@ -1,3 +1,4 @@
+const orders = require('../models/orders')
 const customerServices = require('./CustomerServices')
 
 class CustomerController {
@@ -41,8 +42,58 @@ class CustomerController {
 
     //[GET] /customer-detail
     async customerDetail(req, res) {
+        const limit = 5
+        let page
+        if (req.query.page == undefined) { page = 1 }
+        else { page = req.query.page }
+
         const customer = await customerServices.findCustomer(req.query.username)
-        res.render('customers/customers-detail', { customer })
+        const result = await customerServices.getOrdersByCustomer(req.query.username, page, limit)
+
+        // Calculate number of resulted pages
+        let isPreValid = true
+        let isNextValid = true
+        if (page == 1) { isPreValid = false }
+        if (page == Math.ceil(result.count / limit)) { isNextValid = false }
+
+        let totalSpent = 0
+        for (let i in result.rows) {
+            totalSpent += result.rows[i].final_cost
+        }
+
+        customer.averageSpent = Math.round(totalSpent / result.count)
+
+        customer.lastOrder = {
+            ID: result.rows[result.rows.length - 1].order_id,
+            time: (Date.now() - result.rows[result.rows.length - 1].order_date).toString()
+        }
+
+        customer.recentAddress = {
+            name: customer.username,
+            address: result.rows[result.rows.length - 1].customer_address
+        }
+
+        // if (result.rows.length > 1) {
+        //     customer.recentAddress[1] = {
+        //         name: customer.username,
+        //         address: result.rows[result.rows.length - 2].customer_address
+        //     }
+        // }
+
+        res.render('customers/customers-detail', {
+            customer,
+            orders: result.rows,
+            totalSpent,
+            totalOder: result.count,
+            // Use for pagination
+            path: "/customer/customers-detail?username=" + req.query.username + "page=",
+            page,
+            prePage: parseInt(page) - 1,
+            nextPage: parseInt(page) + 1,
+            lastPage: Math.ceil(result.count / limit),
+            isPreValid,
+            isNextValid
+        })
     }
 }
 
