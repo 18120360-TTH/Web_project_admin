@@ -1,0 +1,78 @@
+const { models } = require('../../config/db')
+// const sequelize = require('sequelize')
+
+class SitesServices {
+    getAllOrders = (page, limit) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const offset = (page - 1) * limit
+                const result = await models.orders.findAndCountAll({
+                    raw: true,
+                    offset: offset,
+                    limit: limit,
+                })
+
+                for (let i in result.rows) {
+                    result.rows[i].order_date = result.rows[i].order_date.toDateString()
+                }
+
+                resolve({ orders: result.rows, count: result.count })
+            }
+            catch (err) { reject(err) }
+        })
+    }
+
+    getOrderByID = (order_id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const orderInfo = await models.orders.findByPk(parseInt(order_id), { raw: true })
+                orderInfo.order_date = orderInfo.order_date.toDateString()
+
+                const orderItems = await models.order_items.findAll({
+                    raw: true,
+                    where: { order_id: order_id },
+                    include: {
+                        model: models.books,
+                        as: "book",
+                        include: {
+                            model: models.images,
+                            as: 'images',
+                            where: { img_order: 1 }
+                        }
+                    }
+                })
+
+                for (let i in orderItems) {
+                    orderItems[i].total_price = orderItems[i].items_quantity * orderItems[i]['book.price']
+                }
+
+                console.log(orderInfo)
+
+                resolve({ orderInfo, orderItems })
+            }
+            catch (err) { reject(err) }
+        })
+    }
+
+    // getOrdersByCustomer = (username, page, limit) => {
+    //     return new Promise(async (resolve, reject) => {
+    //         try {
+    //             console.log("--------------------------------------")
+    //             console.log(username, page, limit)
+    //             console.log("--------------------------------------")
+
+    //             const result = await models.orders.findAndCountAll({
+    //                 raw: true,
+    //                 offset: (page - 1) * limit,
+    //                 limit: limit,
+    //                 where: { customer_username: username }
+    //             })
+
+    //             resolve(result)
+    //         }
+    //         catch (err) { reject(err) }
+    //     })
+    // }
+}
+
+module.exports = new SitesServices

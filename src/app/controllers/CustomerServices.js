@@ -47,6 +47,10 @@ class SitesServices {
                     where: { customer_username: username }
                 })
 
+                for (let i in result.rows) {
+                    result.rows[i].order_date = result.rows[i].order_date.toDateString()
+                }
+
                 resolve(result)
             }
             catch (err) { reject(err) }
