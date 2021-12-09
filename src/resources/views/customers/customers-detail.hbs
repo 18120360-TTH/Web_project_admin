@@ -56,7 +56,14 @@
                                                     </th>
                                                     <td style="max-width:270px;">{{order_date}}</td>
                                                     <td>
-                                                        <div class="badge badge-soft-warning font-size-12">
+                                                        <div class="badge 
+                                                        {{#switch delivery_status}}
+                                                            {{#case 'Packed'}} badge-soft-warning {{/case}}
+                                                            {{#case 'In transit'}} badge-soft-primary {{/case}}
+                                                            {{#case 'Chargeback'}} badge-soft-danger {{/case}}
+                                                            {{#case 'Delivered'}} badge-soft-success {{/case}}
+                                                        {{/switch}}
+                                                        font-size-12">
                                                             {{delivery_status}}</div>
                                                     </td>
                                                     <td>{{final_cost}}đ</td>

@@ -25,8 +25,12 @@ class SitesServices {
     getOrderByID = (order_id) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const orderInfo = await models.orders.findByPk(parseInt(order_id), { raw: true })
+                const orderInfo = await models.orders.findByPk(parseInt(order_id), {
+                    raw: true,
+                    include: { model: models.users, as: 'customer_username_user' }
+                })
                 orderInfo.order_date = orderInfo.order_date.toDateString()
+                orderInfo.expected_arriving_time = orderInfo.expected_arriving_time.toDateString()
 
                 const orderItems = await models.order_items.findAll({
                     raw: true,
@@ -42,11 +46,11 @@ class SitesServices {
                     }
                 })
 
+                orderInfo.items_number = 0
                 for (let i in orderItems) {
                     orderItems[i].total_price = orderItems[i].items_quantity * orderItems[i]['book.price']
+                    orderInfo.items_number += orderItems[i].items_quantity
                 }
-
-                console.log(orderInfo)
 
                 resolve({ orderInfo, orderItems })
             }

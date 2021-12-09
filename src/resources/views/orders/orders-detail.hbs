@@ -25,16 +25,20 @@
                                                 </span>
                                                 <span class="text-center">
                                                     <h6 class="font-size-14">Number books: </h6>
-                                                    <span>6 items for 3 books</span>
+                                                    <span>{{orderInfo.items_number}}</span>
                                                 </span>
                                                 <span class="text-center">
-                                                    <h6 class="font-size-14">Total: </h6>
-                                                    <span>$5,882.00</span>
+                                                    <h6 class="font-size-14">Arrived date: </h6>
+                                                    <span>{{orderInfo.expected_arriving_time}}</span>
                                                 </span>
                                                 <span class="text-center">
                                                     <h6 class="font-size-14">Delivery status: </h6>
-                                                    <span
-                                                        class="badge badge-primary">{{orderInfo.delivery_status}}</span>
+                                                    <span class="badge {{#switch orderInfo.delivery_status}}
+                                                            {{#case 'Packed'}} badge-soft-warning {{/case}}
+                                                            {{#case 'In transit'}} badge-soft-primary {{/case}}
+                                                            {{#case 'Chargeback'}} badge-soft-danger {{/case}}
+                                                            {{#case 'Delivered'}} badge-soft-success {{/case}}
+                                                        {{/switch}}">{{orderInfo.delivery_status}}</span>
                                                 </span>
                                             </li>
                                         </ul>
@@ -100,31 +104,29 @@
                                         <li class="list-group-item">
                                             <h5>Customer</h5>
 
-                                            <div class=" card-body d-flex justify-content-center">
-                                                <img class="rounded-circle" src="/images/users/avatar-1.jpg"
-                                                    alt="Card image cap" width="55" height="55">
+                                            <div class=" card-body d-flex justify-content-center align-items-center">
+                                                <img class="rounded-circle"
+                                                    src="{{orderInfo.[customer_username_user.avatar_url]}}"
+                                                    alt="Card image cap" width="45" height="45">
                                                 <div class="ml-3">
-                                                    <h5 class="font-size-16">Jessica Moore</h5>
-                                                    <p>This is a first order</p>
+                                                    <h5 class="font-size-16">
+                                                        {{orderInfo.[customer_username_user.full_name]}}</h5>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <h5>Contact person</h5>
                                             <div class="card-body">
-                                                <h3 class="card-title">Jessica Moore</h3>
-                                                <a href="#">jessica-moore@example.coms</a>
-                                                <p class="mt-1">+38 (094) 730-24-25</p>
+                                                <h3 class="card-title">{{orderInfo.[customer_username_user.full_name]}}
+                                                </h3>
+                                                <a href="#">{{orderInfo.[customer_username_user.email]}}</a>
+                                                <p class="mt-1">{{orderInfo.[customer_username_user.phone_number]}}</p>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <h5>Shipping & Billing address</h5>
                                             <div class="card-body">
-                                                <p>Jessica Moore
-                                                    <br>Random Federation
-                                                    <br>115302, Moscow
-                                                    <br>ul. Varshavskaya, 15-2-178
-                                                </p>
+                                                <p>{{orderInfo.[customer_username_user.address]}}</p>
                                             </div>
                                         </li>
                                     </ul>
