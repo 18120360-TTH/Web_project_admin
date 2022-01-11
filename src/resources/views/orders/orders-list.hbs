@@ -37,191 +37,104 @@
                                             <thead class="thead-light text-center">
                                                 <tr>
                                                     <th>Order ID</th>
-                                                    <th>Date</th>
+                                                    <th>Order date</th>
                                                     <th>Delivery address</th>
-                                                    <th>Total</th>
+                                                    <th>Cost</th>
                                                     <th>Delivery Status</th>
                                                     <th style="width: 180px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
+                                                {{#each orders}}
                                                 <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1572</a> </td>
-                                                    <td> 04 Apr, 2020 </td>
-                                                    <td>Walter Brown</td>
+                                                    <td><a class="text-primary"
+                                                            href="/orders/orders-detail?order_id={{order_id}}"
+                                                            class="text-dark font-weight-bold">#{{order_id}}</a> </td>
+                                                    <td> {{order_date}} </td>
+                                                    <td> {{customer_address}}</td>
 
-                                                    <td> $172 </td>
+                                                    <td class="font-weight-bold text-dark"> {{final_cost}} đ</td>
                                                     <td>
-                                                        <div class="badge badge-soft-warning font-size-12">Packed</div>
+                                                        <div class="badge 
+                                                        {{#switch delivery_status}}
+                                                            {{#case 'Packed'}} badge-soft-warning {{/case}}
+                                                            {{#case 'In transit'}} badge-soft-primary {{/case}}
+                                                            {{#case 'Chargeback'}} badge-soft-danger {{/case}}
+                                                            {{#case 'Delivered'}} badge-soft-success {{/case}}
+                                                        {{/switch}}
+                                                        font-size-12">
+                                                            {{delivery_status}}</div>
                                                     </td>
 
                                                     <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
+                                                        <a href="" class="mr-3 text-primary" data-toggle="modal"
+                                                            data-target="#updateConfirm" data-placement="top"
                                                             data-original-title="Edit"><i
                                                                 class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
+                                                        <a href="" class="text-danger" data-toggle="modal"
+                                                            data-target="#deleteConfirm" data-placement="top"
                                                             data-original-title="Delete"><i
                                                                 class="mdi mdi-trash-can font-size-18"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1571</a> </td>
-                                                    <td> 03 Apr, 2020 </td>
-                                                    <td>Jimmy Barker</td>
-
-                                                    <td> $165 </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-primary font-size-12">In transit
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1570</a> </td>
-                                                    <td> 03 Apr, 2020 </td>
-                                                    <td>Donald Bailey</td>
-
-                                                    <td> $146 </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-12">Delivered
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1569</a> </td>
-                                                    <td>
-                                                        02 Apr, 2020
-                                                    </td>
-                                                    <td>Paul Jones</td>
-
-                                                    <td>
-                                                        $183
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-success font-size-12">Delivered
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1568</a> </td>
-                                                    <td>
-                                                        01 Apr, 2020
-                                                    </td>
-                                                    <td>Jefferson Allen</td>
-
-                                                    <td>
-                                                        $160
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-danger font-size-12">Chargeback
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1567</a> </td>
-                                                    <td>
-                                                        31 Mar, 2020
-                                                    </td>
-                                                    <td>Jeffrey Waltz</td>
-
-                                                    <td>
-                                                        $105
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-primary font-size-12">In transit
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="/orders/orders-detail"
-                                                            class="text-dark font-weight-bold">#NZ1566</a> </td>
-                                                    <td>
-                                                        30 Mar, 2020
-                                                    </td>
-                                                    <td>Jewel Buckley</td>
-
-                                                    <td>
-                                                        $112
-                                                    </td>
-                                                    <td>
-                                                        <div class="badge badge-soft-warning font-size-12">Packed</div>
-                                                    </td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0);" class="mr-3 text-primary"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit"><i
-                                                                class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete"><i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </td>
-                                                </tr>
+                                                {{/each}}
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="row pr-5 pl-5 pb-4">
+                                    <div class="col-sm-12">
+                                        <p class="mb-sm-0 mt-2">Page <span class="font-weight-bold">{{page}}</span>
+                                            of <span class="font-weight-bold">{{lastPage}}</span></p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="float-sm-right">
+                                            <ul class="pagination pagination-rounded mb-sm-0">
+                                                {{#if isPreValid}}
+                                                <li class="page-item">
+                                                    <a href="{{path}}1" class="page-link"><i
+                                                            class="mdi mdi-chevron-double-left"></i></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-left"></i></a>
+                                                </li>
+                                                {{else}}
+                                                <li class="page-item disabled">
+                                                    <a href="{{path}}1" class="page-link"><i
+                                                            class="mdi mdi-chevron-double-left"></i></a>
+                                                </li>
+                                                <li class="page-item disabled">
+                                                    <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-left"></i></a>
+                                                </li>
+                                                {{/if}}
+
+                                                <li class="page-item active">
+                                                    <a href="#" class="page-link">{{page}}</a>
+                                                </li>
+
+                                                {{#if isNextValid}}
+                                                <li class="page-item">
+                                                    <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-right"></i></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-double-right"></i></a>
+                                                </li>
+                                                {{else}}
+                                                <li class="page-item disabled">
+                                                    <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-right"></i></a>
+                                                </li>
+                                                <li class="page-item disabled">
+                                                    <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                            class="mdi mdi-chevron-double-right"></i></a>
+                                                </li>
+                                                {{/if}}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,3 +165,50 @@
     </div>
     <!-- END layout-wrapper -->
 </body>
+
+<div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update delivery Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <select class="modal-body form-control">
+                    <option value=" Packed">Packed</option>
+                    <option value="In transit">In transit</option>
+                    <option value="Chargeback">Chargeback</option>
+                    <option value="Success">Success</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-block-user" type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirm delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this order ?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-product" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

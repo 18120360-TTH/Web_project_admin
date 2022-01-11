@@ -46,37 +46,25 @@
                                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr class="text-center">
-                                                        <th>Admin</th>
+                                                        <th colspan="2">Admin</th>
+                                                        <th>Full name</th>
                                                         <th>Email</th>
                                                         <th>Phone</th>
-                                                        <th>Status</th>
-                                                        <th style="width: 120px;">Action</th>
                                                     </tr>
-                                                </thead>                                            
+                                                </thead>
                                                 <tbody class="text-center">
-                                                    {{#each admins}}                                                    
+                                                    {{#each admins}}
                                                     <tr>
-                                                        <td><a href="/admin/admin-profile?username={{username}}"
-                                                        class="text-primary">{{username}}</a></td>
+                                                        <td class="text-right"><img src="{{avatar_url}}"
+                                                                alt="{{full_name}}" width="50px" height="50px"
+                                                                class="rounded-circle"></td>
+                                                        <td class="text-left text-primary">{{username}}</td>
+                                                        <td>{{full_name}}</td>
                                                         <td>{{email}}</td>
                                                         <td>{{phone_number}}</td>
-
-                                                        <td>
-                                                            {{#if active}}
-                                                            <div class="badge badge-soft-success font-size-14">Active</div>
-                                                            {{else}}
-                                                            <div class="badge badge-soft-danger font-size-14">Blocked</div>
-                                                            {{/if}}
-                                                        </td>
-                                                        <td>
-                                                            <a class="text-center text-warning" href="" data-toggle="modal"
-                                                                data-target="#blockConfirm" data-placement="top" title=""
-                                                                data-original-title="Edit"><i
-                                                                    class="mdi mdi-lock-question mdi-18px"></i></a>
-                                                        </td>
-                                                    </tr>                                                    
+                                                    </tr>
                                                     {{/each}}
-                                                </tbody>                        
+                                                </tbody>
                                             </table>
                                         </div>
                                         <div class="row mt-4">

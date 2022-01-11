@@ -36,7 +36,7 @@
                                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead class="thead-light">
                                                 <tr class="text-center">
-                                                    <th>Customer</th>
+                                                    <th colspan="2">Customer</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Wallet Balance</th>
@@ -47,7 +47,11 @@
                                             <tbody class="text-center">
                                                 {{#each customers}}
                                                 <tr>
-                                                    <td><a href="/customer/customer-detail">{{full_name}}</a></td>
+                                                    <td class="text-right"><img src="{{avatar_url}}" alt="{{full_name}}"
+                                                            width="50px" height="50px" class="rounded-circle"></td>
+                                                    <td class="text-left"><a
+                                                            href="/customer/customer-detail?username={{username}}">{{full_name}}</a>
+                                                    </td>
                                                     <td>{{email}}</td>
                                                     <td>{{phone_number}}</td>
 
@@ -69,6 +73,61 @@
                                                 {{/each}}
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12">
+                                            <p class="mb-sm-0 mt-2">Page <span class="font-weight-bold">{{page}}</span>
+                                                of <span class="font-weight-bold">{{lastPage}}</span></p>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="float-sm-right">
+                                                <ul class="pagination pagination-rounded mb-sm-0">
+                                                    {{#if isPreValid}}
+                                                    <li class="page-item">
+                                                        <a href="{{path}}1" class="page-link"><i
+                                                                class="mdi mdi-chevron-double-left"></i></a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-left"></i></a>
+                                                    </li>
+                                                    {{else}}
+                                                    <li class="page-item disabled">
+                                                        <a href="{{path}}1" class="page-link"><i
+                                                                class="mdi mdi-chevron-double-left"></i></a>
+                                                    </li>
+                                                    <li class="page-item disabled">
+                                                        <a href="{{path}}{{prePage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-left"></i></a>
+                                                    </li>
+                                                    {{/if}}
+
+                                                    <li class="page-item active">
+                                                        <a href="#" class="page-link">{{page}}</a>
+                                                    </li>
+
+                                                    {{#if isNextValid}}
+                                                    <li class="page-item">
+                                                        <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-right"></i></a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-double-right"></i></a>
+                                                    </li>
+                                                    {{else}}
+                                                    <li class="page-item disabled">
+                                                        <a href="{{path}}{{nextPage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-right"></i></a>
+                                                    </li>
+                                                    <li class="page-item disabled">
+                                                        <a href="{{path}}{{lastPage}}" class="page-link"><i
+                                                                class="mdi mdi-chevron-double-right"></i></a>
+                                                    </li>
+                                                    {{/if}}
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

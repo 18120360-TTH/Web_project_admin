@@ -1,15 +1,17 @@
 const adminServices = require('./AdminServices')
+const multer = require('multer')
+const path = require('path')
 
 class AdminController {
-
     // [GET] /admin-profile
     async adminProfile(req, res) {
-        const userInfo = await adminServices.findUser(req.query.username)
+        const userInfo = await adminServices.findAdmin(req.user.username)
         res.render('admin/admin-profile', { userInfo })
     }
 
     // [GET] /admins-list
     async adminsList(req, res) {
+        const limit = 5
         let page
         if (req.query.page == undefined) {
             page = 1
@@ -18,10 +20,10 @@ class AdminController {
             page = req.query.page
         }
 
-        const { admins, count } = await adminServices.getAllAdmins(page)
+        const { admins, count } = await adminServices.getAllAdmins(page, limit)
 
         // Calculate number of resulted pages
-        const totalPage = Math.ceil(count / 6)
+        const totalPage = Math.ceil(count / limit)
 
         // If user access an invalid page
         if (req.query.page < 1 || req.query.page > totalPage || (isNaN(req.query.page) && req.query.page != undefined)) {
@@ -45,22 +47,40 @@ class AdminController {
             lastPage: totalPage,
             isPreValid,
             isNextValid,
-            /* // Use to indicate results order
-            firstIndex: (page - 1) * 6 + 1,
-            lastIndex: (page - 1) * 6 + admins.length,
-            count */
         })
     }
 
     //[GET] /add-account
-    addAdminPage(req,res) {
+    addAdminPage(req, res) {
         res.render('admin/add-admin')
     }
 
-    //[POST] /add-account/new-admin
-    async addNewAdmin(req,res){
+    //[POST] /add-account
+    async addNewAdmin(req, res) {
         const isAdded = await adminServices.addNewAdmin(req.body)
         res.redirect('/admin/admins-list')
+    }
+
+    // [POST] /admin-profile?update=profile
+    async updateProfile(req, res) {
+        const storage = multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, path.join(__dirname, '../../public/images/users'))
+            },
+            filename: function (req, file, callback) {
+                callback(null, req.user.username + '_' + Date.now() + path.extname(file.originalname))
+            }
+        })
+
+        const upload = multer({ storage: storage }).single('avatar')
+
+        upload(req, res, async function (err) {
+            await adminServices.updateProfile(req.user.username, req.body, req.file)
+        })
+
+
+
+        res.redirect('/admin/admin-profile')
     }
 }
 
