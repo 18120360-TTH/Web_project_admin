@@ -1,5 +1,5 @@
 const { SequelizeScopeError } = require('sequelize/dist')
-const productServices = require('./ProductServices')
+const productServices = require('../services/ProductServices')
 const multer = require('multer')
 const path = require('path')
 

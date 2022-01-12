@@ -1,4 +1,4 @@
-const { models } = require('../../config/db')
+const { models } = require('../models/index')
 const sequelize = require('sequelize')
 
 class AuthServices {

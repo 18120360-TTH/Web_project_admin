@@ -1,5 +1,5 @@
 const orders = require('../models/orders')
-const customerServices = require('./CustomerServices')
+const customerServices = require('../services/CustomerServices')
 
 class CustomerController {
 

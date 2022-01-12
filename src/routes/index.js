@@ -4,7 +4,7 @@ const customerRouter = require('./customer')
 const errorsRouter = require('./errors')
 const sitesRouter = require('./sites')
 const ordersRouter = require('./orders')
-const authController = require('../app/controllers/AuthController')
+const authController = require('../controllers/AuthController')
 const adminController = require('./admin')
 
 function route(app) {

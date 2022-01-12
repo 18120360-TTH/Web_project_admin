@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const ErrorsController = require('../app/controllers/ErrorsController')
+const ErrorsController = require('../controllers/ErrorsController')
 
 router.use('/', ErrorsController.notFound)
 

@@ -1,4 +1,4 @@
-const adminServices = require('./AdminServices')
+const adminServices = require('../services/AdminServices')
 const multer = require('multer')
 const path = require('path')
 

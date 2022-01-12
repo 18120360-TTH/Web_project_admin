@@ -44,7 +44,7 @@ sequelize.authenticate()
       extname: '.hbs',
     }));
     app.set('view engine', 'hbs');
-    app.set('views', path.join(__dirname, 'resources/views'))
+    app.set('views', path.join(__dirname, 'views'))
 
     // Handlebars register
     let hbs = handlebars.create({});

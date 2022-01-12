@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
-const authController = require('../app/controllers/AuthController')
-const initPassportLocal = require('../app/controllers/auth/PassportLocal')
+const authController = require('../controllers/AuthController')
+const initPassportLocal = require('../middleware/PassportHandler')
 
 initPassportLocal()
 
