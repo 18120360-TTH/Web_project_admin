@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { sequelize } = require('./config/db')
+const { sequelize } = require('./models')
 
 sequelize.authenticate()
   .then(() => {
@@ -38,14 +38,13 @@ sequelize.authenticate()
     }))
     app.use(passport.initialize())
     app.use(passport.session())
-
+    
     // Template engine
-    app.engine('hbs', handlebars({
-      extname: '.hbs',
-    }));
-    app.set('view engine', 'hbs');
+    app.engine('.hbs', handlebars({ extname: '.hbs' }));
+    app.set('view engine', '.hbs');
     app.set('views', path.join(__dirname, 'views'))
 
+    
     // Handlebars register
     let hbs = handlebars.create({});
     // Keep selected value in pagination

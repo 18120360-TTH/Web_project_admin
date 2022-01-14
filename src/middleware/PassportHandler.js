@@ -1,6 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const authServices = require('../AuthServices')
+const authServices = require('../services/AuthServices')
 const bcrypt = require('bcrypt')
 
 let initPassportLocal = () => {
