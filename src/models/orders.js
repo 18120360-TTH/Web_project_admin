@@ -37,6 +37,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.ENUM('COD'),
       allowNull: true
     },
+    receiver_name: {
+      type: DataTypes.STRING(40),
+      allowNull: false
+    },
     customer_phone_number: {
       type: DataTypes.STRING(255),
       allowNull: true

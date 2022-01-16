@@ -24,11 +24,19 @@
                                     <ul class="list-group list-group-flush text-center">
                                         <li class="list-group-item">
                                             <h6 class="font-size-14">Last order</h6>
+                                            {{#if orders}}
                                             <span class="text-primary">#{{customer.lastOrder.ID}}</span>
+                                            {{else}}
+                                            <span>None</span>
+                                            {{/if}}
                                         </li>
                                         <li class="list-group-item">
                                             <h6 class="font-size-14">Average Spent</h6>
+                                            {{#if orders}}
                                             <span>{{customer.averageSpent}}đ</span>
+                                            {{else}}
+                                            <span>None</span>
+                                            {{/if}}
                                         </li>
                                     </ul>
                                 </div>
@@ -38,7 +46,9 @@
                                 <div class="row card">
                                     <div class="d-flex justify-content-between mt-4 ml-4 mr-4">
                                         <h5>Recently orders</h5>
+                                        {{#if totalSpent}}
                                         <p> Total spent {{totalSpent}}đ on {{totalOder}} orders</p>
+                                        {{/if}}
                                     </div>
                                     <div class="table-responsive p-4">
                                         <table class="table table-striped mb-0 text-center">
@@ -48,6 +58,7 @@
                                                 <th>Status</th>
                                                 <th>Final cost</th>
                                             </thead>
+                                            {{#if orders}}
                                             <tbody>
                                                 {{#each orders}}
                                                 <tr>
@@ -69,9 +80,17 @@
                                                     <td>{{final_cost}}đ</td>
                                                 </tr>
                                                 {{/each}}
+                                                {{else}}
+                                                <tr>
+                                                    <td colspan="4" class="text-center">
+                                                        This user has not had any orders yet!
+                                                    </td>
+                                                </tr>
+                                                {{/if}}
                                             </tbody>
                                         </table>
                                     </div>
+                                    {{#if path}}
                                     <div class="row d-flex justify-content-center pb-3">
                                         <ul class="pagination pagination-rounded mb-sm-0">
                                             {{#if isPreValid}}
@@ -119,22 +138,24 @@
                                             {{/if}}
                                         </ul>
                                     </div>
+                                    {{/if}}
                                 </div>
+                                {{#if customer.recentAddress}}
                                 <div class="row card">
                                     <div class="d-flex mt-3 ml-4 mr-4">
                                         <h5>Recently delivery addresses</h5>
                                     </div>
                                     <div class="ml-4 mr-4">
                                         <ul class="list-group list-group-flush">
-                                            {{#with customer.recentAddress}}
+
                                             <li class="list-group-item">
-                                                <h6 class="font-size-14">{{name}}</h6>
-                                                <span>{{address}}</span>
+                                                <h6 class="font-size-14">{{customer.recentAddress.name}}</h6>
+                                                <span>{{customer.recentAddress.address}}</span>
                                             </li>
-                                            {{/with}}
                                         </ul>
                                     </div>
                                 </div>
+                                {{/if}}
                             </div>
 
                         </div>
