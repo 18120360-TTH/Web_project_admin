@@ -58,6 +58,19 @@ class SitesServices {
         })
     }
 
+    updateStatus = (order_id,delivery_status) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await models.orders.update(
+                    {delivery_status: delivery_status},
+                    {where: { order_id: order_id }
+                });
+                resolve(result)
+            }
+            catch (err) { reject(err) }
+        })
+    }
+
     // getOrdersByCustomer = (username, page, limit) => {
     //     return new Promise(async (resolve, reject) => {
     //         try {

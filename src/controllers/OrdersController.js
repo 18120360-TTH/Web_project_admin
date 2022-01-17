@@ -33,6 +33,17 @@ class OrdersController {
         res.render('orders/orders-detail', { orderInfo, orderItems })
     }
 
+    //[POST] /update-status/:order_id
+    async updateStatus(req, res) {
+        res.json(req.body)
+       /*  const delivery_status = req.body.updateDeliveryStatus
+        const order_id = req.params.order_id
+        
+        const isUpdate = await ordersServices.updateStatus(order_id,delivery_status)
+ */
+        res.redirect("/orders/order-list")
+    }
+
 }
 
 module.exports = new OrdersController
