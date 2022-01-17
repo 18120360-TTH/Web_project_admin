@@ -11,8 +11,8 @@ let initPassportLocal = () => {
     }, async (req, username, password, done) => {
         try {
             const userRecord = await authServices.findUser(username)
-            console.log("Password hashed--------------------------------------")
-            console.log(await bcrypt.compare(password, userRecord.password_hashed))
+            /* console.log("Password hashed--------------------------------------")
+            console.log(await bcrypt.compare(password, userRecord.password_hashed)) */
             if (userRecord && await bcrypt.compare(password, userRecord.password_hashed)) {
                 return done(null, userRecord)
             } else {
@@ -20,7 +20,7 @@ let initPassportLocal = () => {
             }
         }
         catch (err) {
-            console.log(error)
+            console.log(err)
             return done(null, false)
         }
     }
@@ -28,8 +28,8 @@ let initPassportLocal = () => {
 }
 
 passport.serializeUser((user, done) => {
-    console.log("passport.serializeUser----------------------")
-    console.log(user)
+    //console.log("passport.serializeUser----------------------")
+    //console.log(user)
     done(null, {
         username: user.username,
         avatar_url: user.avatar_url,

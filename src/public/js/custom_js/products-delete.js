@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#Delete-Modal-Center').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         bookID = button.data('id')
-        console.log(bookID);
     });
 
     btnDeleteProduct.onclick = function () {

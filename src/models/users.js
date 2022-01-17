@@ -24,6 +24,11 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       unique: "email"
     },
+    verify_email: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
     address: {
       type: DataTypes.STRING(255),
       allowNull: false

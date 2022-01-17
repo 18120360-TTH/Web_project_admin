@@ -36,10 +36,9 @@ class SitesServices {
     getOrdersByCustomer = (username, page, limit) => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log("--------------------------------------")
+                /* console.log("--------------------------------------")
                 console.log(username, page, limit)
-                console.log("--------------------------------------")
-
+                console.log("--------------------------------------")*/
                 const result = await models.orders.findAndCountAll({
                     raw: true,
                     offset: (page - 1) * limit,
@@ -50,6 +49,34 @@ class SitesServices {
                 for (let i in result.rows) {
                     result.rows[i].order_date = result.rows[i].order_date.toDateString()
                 }
+
+                resolve(result)
+            }
+            catch (err) { reject(err) }
+        })
+    }
+
+    blockUser = (username) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await models.users.update(
+                    {active: false},
+                    {where: { username: username, role: 'Customer' }
+                });
+
+                resolve(result)
+            }
+            catch (err) { reject(err) }
+        })
+    }
+
+    unblockUser = (username) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await models.users.update(
+                    {active: true},
+                    {where: { username: username, role: 'Customer' }
+                });
 
                 resolve(result)
             }

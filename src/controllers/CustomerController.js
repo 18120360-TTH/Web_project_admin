@@ -1,4 +1,5 @@
 const orders = require('../models/orders')
+const CustomerServices = require('../services/CustomerServices')
 const customerServices = require('../services/CustomerServices')
 
 class CustomerController {
@@ -92,6 +93,23 @@ class CustomerController {
             })
         }
     }
+
+    //[POST] /block/:username
+    async blockUser(req, res) {
+        const customerUsername = req.params.username
+        const isBlock = await CustomerServices.blockUser(customerUsername)
+
+        res.redirect('/customer/customers-list')
+    }
+
+    //[POST] /unblock/:username
+    async unblockUser(req, res) {
+        const customerUsername = req.params.username
+        const isBlock = await CustomerServices.unblockUser(customerUsername)
+
+        res.redirect('/customer/customers-list')
+    }
+
 }
 
 module.exports = new CustomerController
