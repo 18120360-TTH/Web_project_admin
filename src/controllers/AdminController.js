@@ -65,7 +65,7 @@ class AdminController {
     async updateProfile(req, res) {
         const storage = multer.diskStorage({
             destination: function (req, file, callback) {
-                callback(null, path.join(__dirname, '../../public/images/users'))
+                callback(null, path.join(__dirname, '../public/images/users'))
             },
             filename: function (req, file, callback) {
                 callback(null, req.user.username + '_' + Date.now() + path.extname(file.originalname))

@@ -349,6 +349,7 @@ class ProductServices {
             try {
                 const max_id = await this.findMaxBookID()
 
+                console.log(images)
                 // Create new book must be first because of Foreign-key
                 await models.books.create({
                     book_id: max_id + 1,

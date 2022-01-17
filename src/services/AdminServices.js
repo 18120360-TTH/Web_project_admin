@@ -6,13 +6,14 @@ class SitesServices {
     addNewAdmin = (AccountInfo) => {
         return new Promise(async (resolve, reject) => {
             try {
-
+                console.log(AccountInfo)
                 await models.users.create({
                     username: AccountInfo.username,
                     password_hashed: bcrypt.hashSync(AccountInfo.password, 10),
                     full_name: (AccountInfo.firstname + " " + AccountInfo.lastname),
                     email: AccountInfo.email,
-                    avatar_url: '/images/avatars/person-0.png',
+                    verify_email: 1,
+                    avatar_url: '/images/users/avatar-0.jpg',
                     address: " ",
                     role: "Admin",
                     active: 1,
