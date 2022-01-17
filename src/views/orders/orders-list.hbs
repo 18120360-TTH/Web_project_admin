@@ -69,7 +69,7 @@
                                                     <td>
                                                         <a href="" class="mr-3 text-primary" data-toggle="modal"
                                                             data-target="#updateConfirm" data-placement="top"
-                                                            data-original-title="Edit"><i
+                                                            data-original-title="Edit" data-id="{{order_id}}"><i
                                                                 class="mdi mdi-pencil font-size-18"></i></a>
                                                         <a href="" class="text-danger" data-toggle="modal"
                                                             data-target="#deleteConfirm" data-placement="top"
@@ -166,6 +166,10 @@
     <!-- END layout-wrapper -->
 </body>
 
+{{!-- Submit form --}}
+<form name="submit-form" method="POST">
+
+{{!-- update delivery status modal --}}
 <div class="modal fade" id="updateConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -177,21 +181,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <select class="modal-body form-control">
-                    <option value=" Packed">Packed</option>
-                    <option value="In transit">In transit</option>
-                    <option value="Chargeback">Chargeback</option>
-                    <option value="Success">Success</option>
-                </select>
+                <div class="form-group">
+                    <select class="form-control" id="updateDeliveryStatus" name="updateDeliveryStatus"></select>
+                        <option value="Packed">Packed</option>
+                        <option value="In transit">In transit</option>
+                        <option value="Chargeback">Chargeback</option>
+                        <option value="Success">Success</option>
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
-                <button id="btn-block-user" type="button" class="btn btn-primary">Update</button>
+                <button id="btn-update-order-status" type="button" class="btn btn-primary">Update</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 
+{{!-- delete order modal --}}
 <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -212,3 +220,5 @@
         </div>
     </div>
 </div>
+
+<script src="/js/custom_js/orders-list.js"></script>
