@@ -15,7 +15,7 @@ sequelize.authenticate()
 
 
     const app = express()
-    const port = 3000
+    //const port = 3000
 
 
     const route = require('./routes')
@@ -69,7 +69,8 @@ sequelize.authenticate()
 
     // Routing
     route(app)
-
+  
+    const PORT = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`)
     })
