@@ -38,23 +38,19 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (user, done) => {
-    // try {
-    //     console.log("passport.deserializeUser----------------------")
-    //     console.log(username)
-    //     const userRecord = await authServices.findUser(username)
-    //     if (userRecord) {
-    //         return done(null, userRecord)
-    //     } else {
-    //         return done(null, false)
-    //     }
-    // }
-    // catch (err) {
-    //     console.log(error)
-    //     return done(null, false)
-    // }
-    console.log("passport.deserializeUser----------------------")
-    console.log(user)
-    done(null, user)
+    try {
+        const userRecord = await authServices.findUser(user.username)
+        if (userRecord) {
+            return done(null, userRecord)
+        } else {
+            return done(null, false)
+        }
+    }
+    catch (err) {
+        console.log(err)
+        return done(null, false)
+    }
+    // done(null, user)
 })
 
 module.exports = initPassportLocal;

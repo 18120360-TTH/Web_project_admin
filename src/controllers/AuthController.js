@@ -28,7 +28,7 @@ class AuthController {
         if (!req.isAuthenticated()) {
             res.redirect('/auth/login')
         } else {
-            console.log(req.user)
+            //console.log(req.user)
             res.locals.user = req.user
             next();
         }

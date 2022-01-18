@@ -268,10 +268,6 @@ class ProductServices {
                     book_id: ID
                 }, { raw: true })
 
-                console.log("------------------------")
-                console.log(images)
-                console.log("------------------------")
-
                 if (basicInfo.category_02 != "None" && basicInfo.category_02 != basicInfo.category_01) {
                     await models.categories_of_book.create({
                         category: basicInfo.category_02,
@@ -313,8 +309,6 @@ class ProductServices {
                         raw: true,
                         where: { book_id: ID, img_order: 4 }
                     })
-
-                    console.log(msg)
                 }
 
                 resolve("Book is updated!")
@@ -348,8 +342,6 @@ class ProductServices {
         return new Promise(async (resolve, reject) => {
             try {
                 const max_id = await this.findMaxBookID()
-
-                console.log(images)
                 // Create new book must be first because of Foreign-key
                 await models.books.create({
                     book_id: max_id + 1,

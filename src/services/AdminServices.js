@@ -6,7 +6,7 @@ class SitesServices {
     addNewAdmin = (AccountInfo) => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log(AccountInfo)
+                //console.log(AccountInfo)
                 await models.users.create({
                     username: AccountInfo.username,
                     password_hashed: bcrypt.hashSync(AccountInfo.password, 10),
